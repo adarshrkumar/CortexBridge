@@ -24,8 +24,7 @@ Your project instructions live in the cloud. A small config file in your repo te
 ## Documentation
 
 - [Architecture](ARCHITECTURE.md) — System design and component overview
-- [Instructions Schema](docs/instructions-schema.md) — Structure of the cloud-hosted instructions
-- [Sync Protocol](docs/sync-protocol.md) — How the MCP server fetches and returns context
+- [Sync Protocol](SYNC.md) — How the MCP server fetches and returns context
 - [Features](FEATURES.md) — Full feature list
 - [Roadmap](ROADMAP.md) — Planned features and milestones
 - [Contributing](CONTRIBUTING.md) — How to contribute

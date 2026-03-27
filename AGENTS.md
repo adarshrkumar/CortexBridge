@@ -22,7 +22,7 @@ ROADMAP.md           # Planned work
 ## Conventions
 
 - All specification documents live in `docs/` as Markdown.
-- The instructions schema is the source of truth — see `docs/instructions-schema.md`.
+- The instructions are the source of truth — see `SYNC.md` for how they are fetched and returned.
 - The MCP server is read-only; it fetches and returns instructions, it does not write.
 
 ## Key Constraints

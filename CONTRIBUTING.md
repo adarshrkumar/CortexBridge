@@ -12,7 +12,7 @@ Check [ROADMAP.md](ROADMAP.md) for planned features. Open issues are the best pl
 
 ## Guidelines
 
-- **Spec changes first.** If your contribution changes the instructions schema or sync protocol, update `docs/` before touching implementation code.
+- **Spec changes first.** If your contribution changes the sync protocol, update `SYNC.md` before touching implementation code.
 - **The MCP server is read-only.** It fetches and returns instructions — no writes, no side effects.
 
 ## Commit Style

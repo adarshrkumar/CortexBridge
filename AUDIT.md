@@ -73,5 +73,4 @@ Every term, name, phrase, and concept used across the project.
 - `ARCHITECTURE.md`
 - `CONTRIBUTING.md`
 - `AGENTS.md`
-- `docs/instructions-schema.md`
-- `docs/sync-protocol.md`
+- `SYNC.md`

@@ -35,8 +35,6 @@ No instructions, no settings — just a pointer. Authentication is handled by Be
 
 Live exclusively in the CortexBridge cloud. Edited via the web UI. Returned to agents as context — equivalent to a shared, always-synced `AGENTS.md`.
 
-See [docs/instructions-schema.md](docs/instructions-schema.md) for the structure.
-
 ### MCP Server
 
 On agent startup it:
