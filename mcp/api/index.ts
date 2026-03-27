@@ -5,7 +5,7 @@ import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/
 import express, { Request as ExpressRequest, Response as ExpressResponse } from 'express';
 import { join } from 'path';
 import { z } from 'zod';
-import { auth } from '../src/auth/index.js';
+import { auth } from '../../shared/auth/index.js';
 
 const PORT = parseInt(process.env.PORT ?? '3000', 10);
 const BASE_URL = process.env.BETTER_AUTH_URL ?? `http://localhost:${PORT}`;
