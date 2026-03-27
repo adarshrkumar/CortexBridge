@@ -35,4 +35,17 @@ Other project configs (outside of instructions) are provided by separate MCP too
 
 ## Authentication
 
-CortexBridge uses [Better Auth](https://better-auth.com/) with its MCP auth plugin. Authentication happens at MCP connection time — the agent is prompted to log in via the Better Auth flow if no valid session exists. No tokens are stored in `.cortexconfig` or the repo.
+CortexBridge uses [Better Auth](https://better-auth.com/) with the [OAuth 2.1 Provider](https://www.better-auth.com/docs/plugins/oauth-provider) plugin (`@better-auth/oauth-provider`). Better Auth acts as the authorization server — it issues and verifies access tokens for MCP clients via the standard OAuth 2.1 authorization code flow with PKCE.
+
+Authentication happens at MCP connection time — the agent discovers the authorization server via `/.well-known/oauth-authorization-server`, completes the OAuth flow, and presents a bearer token on subsequent requests. No tokens are stored in `.cortexconfig` or the repo.
+
+The Better Auth instance is backed by **Neon Postgres** (serverless/HTTP) via **Drizzle ORM** (`@neondatabase/serverless` + `drizzle-orm`). The database connection is configured via `DATABASE_URL`.
+
+## Environment Variables
+
+| Variable | Description |
+| --- | --- |
+| `BETTER_AUTH_SECRET` | Random secret used to sign sessions and tokens |
+| `BETTER_AUTH_URL` | Public base URL of the server (e.g. `https://cortexbridge.io`) |
+| `DATABASE_URL` | Neon Postgres connection string |
+| `PORT` | HTTP server port (default: `3000`) |
