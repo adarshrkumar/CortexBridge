@@ -2,15 +2,15 @@ import { toNodeHandler } from 'better-auth/node';
 import { createMcpAuthClient } from 'better-auth/plugins/mcp/client';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
-import { createMcpExpressApp } from '@modelcontextprotocol/sdk/server/express.js';
-import { Request as ExpressRequest, Response as ExpressResponse } from 'express';
+import express, { Request as ExpressRequest, Response as ExpressResponse } from 'express';
 import { z } from 'zod';
-import { auth } from './src/auth';
+import { auth } from '../src/auth';
 
 const PORT = parseInt(process.env.PORT ?? '3000', 10);
 const BASE_URL = process.env.BETTER_AUTH_URL ?? `http://localhost:${PORT}`;
 
-const app = createMcpExpressApp({ host: '0.0.0.0' });
+const app = express();
+app.use(express.json());
 
 // Better Auth OAuth 2.1 authorization server — handles /authorize, /token,
 // /userinfo, /jwks, and all other auth endpoints.
