@@ -35,4 +35,4 @@ Other project configs (outside of instructions) are provided by separate MCP too
 
 ## Authentication
 
-CortexBridge uses [Better Auth](https://www.better-auth.com/) with its MCP auth plugin. Authentication happens at MCP connection time — the agent is prompted to log in via the Better Auth flow if no valid session exists. No tokens are stored in `.cortexconfig` or the repo.
+CortexBridge uses [Better Auth](https://better-auth.com/) with its MCP auth plugin. Authentication happens at MCP connection time — the agent is prompted to log in via the Better Auth flow if no valid session exists. No tokens are stored in `.cortexconfig` or the repo.
