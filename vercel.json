@@ -1,9 +1,9 @@
 {
     "buildCommand": "npm run build",
     "functions": {
-        "dist/api/index.js": {
+        "dist/index.js": {
             "maxDuration": 30
         }
     },
-    "rewrites": [{ "source": "/(.*)", "destination": "/dist/api/index" }]
+    "rewrites": [{ "source": "/(.*)", "destination": "/dist/index" }]
 }

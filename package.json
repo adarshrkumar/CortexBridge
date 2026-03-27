@@ -3,10 +3,10 @@
     "version": "0.1.0",
     "type": "module",
     "scripts": {
-        "dev": "npx tsx watch api/index.ts",
+        "dev": "npx tsx watch index.ts",
         "dev:stdio": "npx tsx watch src/server/index.ts",
         "build": "tsc",
-        "start": "node dist/api/index.js",
+        "start": "node dist/index.js",
         "lint": "eslint src --max-warnings 0 && tsc --noEmit",
         "test": "npx tsx tests/index.ts",
         "check": "npm run lint && npm test"
