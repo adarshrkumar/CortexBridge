@@ -11,6 +11,7 @@ const BASE_URL = process.env.BETTER_AUTH_URL ?? `http://localhost:${PORT}`;
 
 const app = express();
 app.use(express.json());
+app.use(express.static('public'));
 
 // Better Auth OAuth 2.1 authorization server — handles /authorize, /token,
 // /userinfo, /jwks, and all other auth endpoints.
