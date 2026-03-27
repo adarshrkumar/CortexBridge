@@ -3,7 +3,7 @@ import { createMcpAuthClient } from 'better-auth/plugins/mcp/client';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import { createMcpExpressApp } from '@modelcontextprotocol/sdk/server/express.js';
-import { execSync } from 'child_process';
+import { Request as ExpressRequest, Response as ExpressResponse } from 'express';
 import { z } from 'zod';
 import { auth } from '../auth/index.js';
 
@@ -12,79 +12,71 @@ const BASE_URL = process.env.BETTER_AUTH_URL ?? `http://localhost:${PORT}`;
 
 const app = createMcpExpressApp({ host: '0.0.0.0' });
 
-// Mount the Better Auth OAuth 2.1 authorization server at /api/auth.
-// This serves all OAuth endpoints: /authorize, /token, /userinfo, /jwks,
-// /.well-known/oauth-authorization-server, etc.
+// Better Auth OAuth 2.1 authorization server — handles /authorize, /token,
+// /userinfo, /jwks, and all other auth endpoints.
 app.all('/api/auth/*splat', toNodeHandler(auth));
 
-// MCP auth client — verifies bearer tokens issued by the auth server above.
+// OAuth 2.1 authorization server discovery required by the MCP spec.
+// Proxied directly from Better Auth's built-in discovery endpoint.
+app.get('/.well-known/oauth-authorization-server', async (_req, res: ExpressResponse) => {
+    const response = await auth.handler(
+        new Request(`${BASE_URL}/api/auth/.well-known/oauth-authorization-server`)
+    );
+    const body = await response.text();
+    res
+        .status(response.status)
+        .set('Content-Type', response.headers.get('content-type') ?? 'application/json')
+        .end(body);
+});
+
+// OAuth 2.1 protected resource metadata required by the MCP spec.
+app.get('/.well-known/oauth-protected-resource', (_req, res: ExpressResponse) => {
+    res.json({
+        resource: BASE_URL,
+        authorization_servers: [BASE_URL],
+        scopes_supported: ['openid', 'profile', 'email', 'offline_access'],
+        bearer_methods_supported: ['header'],
+    });
+});
+
+// MCP auth client — verifies bearer tokens issued by Better Auth.
 const mcpAuth = createMcpAuthClient({ authURL: BASE_URL });
 
-// OAuth discovery endpoints required by the MCP spec.
-// Clients hit these to locate the authorization server and understand what
-// this resource server protects.
-app.get('/.well-known/oauth-authorization-server', (req, res) => {
-    mcpAuth.discoveryHandler()(req as unknown as Request).then(r => {
-        res.status(r.status);
-        r.headers.forEach((v, k) => res.setHeader(k, v));
-        r.text().then(body => res.end(body));
-    });
-});
-
-app.get('/.well-known/oauth-protected-resource', (req, res) => {
-    mcpAuth.protectedResourceHandler(BASE_URL)(req as unknown as Request).then(r => {
-        res.status(r.status);
-        r.headers.forEach((v, k) => res.setHeader(k, v));
-        r.text().then(body => res.end(body));
-    });
-});
-
 // MCP endpoint — protected by OAuth bearer token verification.
-app.post('/mcp', mcpAuth.middleware(), async (req, res) => {
+// Transport is stateless (sessionIdGenerator: undefined) for serverless compatibility.
+async function handleMcp(req: ExpressRequest, res: ExpressResponse) {
     const server = createMcpServer();
     const transport = new StreamableHTTPServerTransport({
-        sessionIdGenerator: () => crypto.randomUUID(),
+        sessionIdGenerator: undefined,
     });
     await server.connect(transport);
     await transport.handleRequest(req, res, req.body);
-});
+}
 
-app.get('/mcp', mcpAuth.middleware(), async (req, res) => {
-    const server = createMcpServer();
-    const transport = new StreamableHTTPServerTransport({
-        sessionIdGenerator: () => crypto.randomUUID(),
-    });
-    await server.connect(transport);
-    await transport.handleRequest(req, res, req.body);
-});
+app.post('/mcp', mcpAuth.middleware(), handleMcp);
+app.get('/mcp', mcpAuth.middleware(), handleMcp);
 
 function createMcpServer(): McpServer {
-    const server = new McpServer({
-        name: 'cortexbridge',
-        version: '0.1.0',
-    });
+    const server = new McpServer({ name: 'cortexbridge', version: '0.1.0' });
 
     server.registerTool(
         'get-instructions',
         {
             description: 'Fetch instructions for the current org, project, and branch',
             inputSchema: {
-                project: z.string().describe('The project from .cortexconfig'),
+                project: z.string().describe('The project ID from .cortexconfig'),
+                git: z.object({
+                    branch: z.string().describe('git rev-parse --abbrev-ref HEAD'),
+                    commit: z.string().describe('git rev-parse HEAD'),
+                    remote: z.string().optional().describe('git remote get-url origin'),
+                }).describe('Current git state'),
             },
         },
-        async ({ project }) => {
-            // TODO: resolve org from the verified session (req.mcpSession.userId)
+        async ({ project, git }) => {
+            // TODO: resolve org from verified session; fetch from cloud storage
             const org = 'default-org';
-            const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-            // TODO: fetch instructions from cloud storage
-
             return {
-                content: [
-                    {
-                        type: 'text' as const,
-                        text: `Instructions for ${org}/${project}@${branch}`,
-                    },
-                ],
+                content: [{ type: 'text' as const, text: `Instructions for ${org}/${project}@${git.branch}` }],
             };
         }
     );
@@ -94,22 +86,19 @@ function createMcpServer(): McpServer {
         {
             description: 'Fetch code style rules for the current org, project, and branch',
             inputSchema: {
-                project: z.string().describe('The project from .cortexconfig'),
+                project: z.string().describe('The project ID from .cortexconfig'),
+                git: z.object({
+                    branch: z.string().describe('git rev-parse --abbrev-ref HEAD'),
+                    commit: z.string().describe('git rev-parse HEAD'),
+                    remote: z.string().optional().describe('git remote get-url origin'),
+                }).describe('Current git state'),
             },
         },
-        async ({ project }) => {
-            // TODO: resolve org from the verified session (req.mcpSession.userId)
+        async ({ project, git }) => {
+            // TODO: resolve org from verified session; fetch from cloud storage
             const org = 'default-org';
-            const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
-            // TODO: fetch code styles from cloud storage
-
             return {
-                content: [
-                    {
-                        type: 'text' as const,
-                        text: `Code styles for ${org}/${project}@${branch}`,
-                    },
-                ],
+                content: [{ type: 'text' as const, text: `Code styles for ${org}/${project}@${git.branch}` }],
             };
         }
     );
@@ -117,8 +106,13 @@ function createMcpServer(): McpServer {
     return server;
 }
 
-app.listen(PORT, () => {
-    console.log(`CortexBridge listening on ${BASE_URL}`);
-    console.log(`  Auth server: ${BASE_URL}/api/auth`);
-    console.log(`  MCP endpoint: ${BASE_URL}/mcp`);
-});
+// Listen locally when not running on Vercel.
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`CortexBridge listening on ${BASE_URL}`);
+        console.log(`  Auth:  ${BASE_URL}/api/auth`);
+        console.log(`  MCP:   ${BASE_URL}/mcp`);
+    });
+}
+
+export default app;

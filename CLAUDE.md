@@ -32,6 +32,7 @@ ROADMAP.md           # Planned work
 - No `any` types
 - No unused variables (prefix with `_` to ignore)
 - Never create a function just to wrap a single line of code
+- No re-export stubs — move the actual content, never create a file that only re-exports another
 
 ## Key Constraints
 

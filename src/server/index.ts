@@ -1,6 +1,5 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { execSync } from 'child_process';
 import { z } from 'zod';
 
 const server = new McpServer({
@@ -8,25 +7,31 @@ const server = new McpServer({
     version: '0.1.0',
 });
 
+const gitState = z.object({
+    branch: z.string().describe('git rev-parse --abbrev-ref HEAD'),
+    commit: z.string().describe('git rev-parse HEAD'),
+    remote: z.string().optional().describe('git remote get-url origin'),
+}).describe('Current git state');
+
 server.registerTool(
     'get-instructions',
     {
         description: 'Fetch instructions for the current org, project, and branch',
         inputSchema: {
-            project: z.string().describe('The project from .cortexconfig'),
+            project: z.string().describe('The project ID from .cortexconfig'),
+            git: gitState,
         },
     },
-    async ({ project }) => {
+    async ({ project, git }) => {
         // TODO: authenticate via Better Auth (org resolved from session)
         const org = 'default-org';
-        const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
         // TODO: fetch instructions from cloud
 
         return {
             content: [
                 {
                     type: 'text',
-                    text: `Instructions for ${org}/${project}@${branch}`,
+                    text: `Instructions for ${org}/${project}@${git.branch}`,
                 },
             ],
         };
@@ -38,20 +43,20 @@ server.registerTool(
     {
         description: 'Fetch code style rules for the current org, project, and branch',
         inputSchema: {
-            project: z.string().describe('The project from .cortexconfig'),
+            project: z.string().describe('The project ID from .cortexconfig'),
+            git: gitState,
         },
     },
-    async ({ project }) => {
+    async ({ project, git }) => {
         // TODO: authenticate via Better Auth (org resolved from session)
         const org = 'default-org';
-        const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
         // TODO: fetch code styles from cloud
 
         return {
             content: [
                 {
                     type: 'text',
-                    text: `Code styles for ${org}/${project}@${branch}`,
+                    text: `Code styles for ${org}/${project}@${git.branch}`,
                 },
             ],
         };
