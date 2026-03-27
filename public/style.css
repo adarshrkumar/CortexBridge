@@ -50,3 +50,27 @@ footer {
     color: #aaa;
     font-size: 12px;
 }
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #111;
+        color: #e8e8e8;
+    }
+
+    p {
+        color: #999;
+    }
+
+    pre {
+        background: #1a1a1a;
+        border-color: #333;
+    }
+
+    ul {
+        color: #999;
+    }
+
+    footer {
+        color: #555;
+    }
+}
