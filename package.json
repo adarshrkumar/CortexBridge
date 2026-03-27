@@ -6,7 +6,9 @@
         "dev": "tsx watch src/index.ts",
         "build": "tsc",
         "start": "node dist/index.js",
-        "check": "eslint src --max-warnings 0"
+        "lint": "eslint src --max-warnings 0 && tsc --noEmit",
+        "test": "npx tsx tests/index.ts",
+        "check": "npm run lint && npm test"
     },
     "dependencies": {
         "@modelcontextprotocol/sdk": "^1.10.2",
