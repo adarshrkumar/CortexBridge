@@ -2,8 +2,8 @@ body {
     font-family: 'Montserrat', 'Gill Sans', 'Segoe UI', Arial, sans-serif;
     line-height: 1.7;
     max-width: 40rem;
-    margin: 5rem auto;
-    padding-inline: 1.5rem;
+    margin: 2.5rem auto;
+    padding: 1.5rem;
     background: #fff;
     color: #111;
     color-scheme: light dark;
@@ -14,9 +14,6 @@ body {
     }
 }
 
-h2 {
-    margin-block: 2.5rem 0.5rem;
-}
 
 p {
     color: #555;
@@ -49,7 +46,7 @@ ul {
 
 
 footer {
-    margin-block-start: 5rem;
+    margin-block-start: 2.5rem;
     color: #aaa;
 
     @media (prefers-color-scheme: dark) {
