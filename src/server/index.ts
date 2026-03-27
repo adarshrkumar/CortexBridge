@@ -1,5 +1,6 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { execSync } from 'child_process';
 import { z } from 'zod';
 
 const server = new McpServer({
@@ -10,20 +11,47 @@ const server = new McpServer({
 server.registerTool(
     'get-instructions',
     {
-        description: 'Fetch project instructions for the current project',
+        description: 'Fetch instructions for the current org, project, and branch',
         inputSchema: {
             project_id: z.string().describe('The project ID from .cortexconfig'),
         },
     },
     async ({ project_id }) => {
-        // TODO: authenticate via Better Auth
+        // TODO: authenticate via Better Auth (org resolved from session)
+        const org = 'default-org';
+        const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
         // TODO: fetch instructions from cloud
 
         return {
             content: [
                 {
                     type: 'text',
-                    text: `Instructions for project: ${project_id}`,
+                    text: `Instructions for ${org}/${project_id}@${branch}`,
+                },
+            ],
+        };
+    }
+);
+
+server.registerTool(
+    'get-code-styles',
+    {
+        description: 'Fetch code style rules for the current org, project, and branch',
+        inputSchema: {
+            project_id: z.string().describe('The project ID from .cortexconfig'),
+        },
+    },
+    async ({ project_id }) => {
+        // TODO: authenticate via Better Auth (org resolved from session)
+        const org = 'default-org';
+        const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
+        // TODO: fetch code styles from cloud
+
+        return {
+            content: [
+                {
+                    type: 'text',
+                    text: `Code styles for ${org}/${project_id}@${branch}`,
                 },
             ],
         };

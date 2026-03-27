@@ -25,5 +25,14 @@ console.assert(result.content.length > 0, 'expected content in response');
 const first = result.content[0];
 console.log('get-instructions:', first.type === 'text' ? first.text : first.type);
 
+// call get-code-styles
+const styles = await client.callTool({
+    name: 'get-code-styles',
+    arguments: { project_id: 'test-project' },
+}) as CallToolResult;
+console.assert(styles.content.length > 0, 'expected content in styles response');
+const firstStyle = styles.content[0];
+console.log('get-code-styles:', firstStyle.type === 'text' ? firstStyle.text : firstStyle.type);
+
 await client.close();
 console.log('all tests passed');
