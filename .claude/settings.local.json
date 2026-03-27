@@ -14,8 +14,7 @@
       "mcp__vercel__get_deployment_build_logs",
       "Bash(npx vercel:*)",
       "Bash(npm ls:*)",
-      "Bash(npm dedupe:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npm dedupe:*)"
     ]
   }
 }
