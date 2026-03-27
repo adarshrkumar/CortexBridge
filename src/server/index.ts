@@ -13,10 +13,10 @@ server.registerTool(
     {
         description: 'Fetch instructions for the current org, project, and branch',
         inputSchema: {
-            project_id: z.string().describe('The project ID from .cortexconfig'),
+            project: z.string().describe('The project from .cortexconfig'),
         },
     },
-    async ({ project_id }) => {
+    async ({ project }) => {
         // TODO: authenticate via Better Auth (org resolved from session)
         const org = 'default-org';
         const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
@@ -26,7 +26,7 @@ server.registerTool(
             content: [
                 {
                     type: 'text',
-                    text: `Instructions for ${org}/${project_id}@${branch}`,
+                    text: `Instructions for ${org}/${project}@${branch}`,
                 },
             ],
         };
@@ -38,10 +38,10 @@ server.registerTool(
     {
         description: 'Fetch code style rules for the current org, project, and branch',
         inputSchema: {
-            project_id: z.string().describe('The project ID from .cortexconfig'),
+            project: z.string().describe('The project from .cortexconfig'),
         },
     },
-    async ({ project_id }) => {
+    async ({ project }) => {
         // TODO: authenticate via Better Auth (org resolved from session)
         const org = 'default-org';
         const branch = execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
@@ -51,7 +51,7 @@ server.registerTool(
             content: [
                 {
                     type: 'text',
-                    text: `Code styles for ${org}/${project_id}@${branch}`,
+                    text: `Code styles for ${org}/${project}@${branch}`,
                 },
             ],
         };

@@ -8,7 +8,7 @@ On agent startup, the CortexBridge MCP server fetches the project instructions f
 
 ```yaml
 # .cortexconfig
-project_id: acme-api
+project: acme-api
 ```
 
 The only file to commit. No instructions, no settings — just the project ID.
@@ -21,7 +21,7 @@ Agent starts
     ▼
 MCP server connects
     │
-    ├─ reads .cortexconfig for project_id
+    ├─ reads .cortexconfig for project
     ├─ authenticates via Better Auth (MCP auth flow)
     ├─ fetches instructions from cloud
     └─ returns instructions as context (equivalent to AGENTS.md)

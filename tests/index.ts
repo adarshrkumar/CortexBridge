@@ -19,7 +19,7 @@ console.log('tools:', tools.map(t => t.name));
 // call get-instructions
 const result = await client.callTool({
     name: 'get-instructions',
-    arguments: { project_id: 'test-project' },
+    arguments: { project: 'test-project' },
 }) as CallToolResult;
 console.assert(result.content.length > 0, 'expected content in response');
 const first = result.content[0];
@@ -28,7 +28,7 @@ console.log('get-instructions:', first.type === 'text' ? first.text : first.type
 // call get-code-styles
 const styles = await client.callTool({
     name: 'get-code-styles',
-    arguments: { project_id: 'test-project' },
+    arguments: { project: 'test-project' },
 }) as CallToolResult;
 console.assert(styles.content.length > 0, 'expected content in styles response');
 const firstStyle = styles.content[0];

@@ -16,7 +16,7 @@ Every term, name, phrase, and concept used across the project.
 ## Local File
 
 - `.cortexconfig`
-- `project_id` (only field)
+- `project` (only field)
 
 ## Auth
 

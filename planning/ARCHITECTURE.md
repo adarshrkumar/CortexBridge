@@ -26,7 +26,7 @@ Any agent that supports MCP gets the same instructions. No per-platform files, n
 
 The only local artifact. Committed to the repo. Contains:
 
-- `project_id` — identifies the project in the cloud
+- `project` — identifies the project in the cloud
 
 No instructions, no settings — just a pointer. Authentication is handled by Better Auth via the MCP auth flow.
 
@@ -38,7 +38,7 @@ Live exclusively in the CortexBridge cloud. Edited via the web UI. Returned to a
 
 On agent startup it:
 
-1. Reads `.cortexconfig` to get `project_id`
+1. Reads `.cortexconfig` to get `project`
 2. Authenticates via Better Auth using the MCP auth flow
 3. Fetches the instructions from the cloud
 4. Returns them as context — equivalent to an `AGENTS.md` file
