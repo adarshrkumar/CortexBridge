@@ -10,7 +10,7 @@ export default {
     },
     overrides: [
         {
-            files: ['public/**/*.css'],
+            files: ['mcp/public/**/*.css'],
             rules: {},
         },
     ],

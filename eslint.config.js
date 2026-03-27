@@ -4,10 +4,10 @@ import tsParser from '@typescript-eslint/parser';
 
 export default [
     {
-        ignores: ['node_modules', 'dist']
+        ignores: ['**/node_modules', '**/dist']
     },
     {
-        files: ['src/**/*.{js,ts}', '!src/**/*.astro'],
+        files: ['mcp/src/**/*.{js,ts}', 'mcp/api/**/*.{js,ts}'],
         languageOptions: {
             parser: tsParser,
             ecmaVersion: 'latest',

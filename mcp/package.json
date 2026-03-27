@@ -8,7 +8,7 @@
         "dev:stdio": "npm run colors && npx tsx watch src/server/index.ts",
         "build": "npm run colors && tsc",
         "start": "node dist/api/index.js",
-        "lint": "npm run colors && eslint src --max-warnings 0 && stylelint \"public/**/*.css\" && tsc --noEmit",
+        "lint": "npm run colors && eslint src api --max-warnings 0 && stylelint \"public/**/*.css\" && tsc --noEmit",
         "test": "npm run colors && npx tsx tests/index.ts",
         "check": "npm run lint && npm test"
     },
