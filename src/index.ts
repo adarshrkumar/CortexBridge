@@ -7,11 +7,13 @@ const server = new McpServer({
     version: '0.1.0',
 });
 
-server.tool(
+server.registerTool(
     'get-instructions',
-    'Fetch project instructions for the current project',
     {
-        project_id: z.string().describe('The project ID from .cortexconfig'),
+        description: 'Fetch project instructions for the current project',
+        inputSchema: {
+            project_id: z.string().describe('The project ID from .cortexconfig'),
+        },
     },
     async ({ project_id }) => {
         // TODO: authenticate via Better Auth
