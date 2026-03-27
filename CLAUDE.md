@@ -35,6 +35,10 @@ ROADMAP.md           # Planned work
 - No re-export stubs — move the actual content, never create a file that only re-exports another
 - CSS selectors must always be expanded — one property per line, never condensed on a single line
 
+## Verification
+
+- Always run `npm run lint` or `npm run check` — never run `tsc`, `eslint`, or `stylelint` directly.
+
 ## Key Constraints
 
 - The MCP server must be stateless between requests; all state lives in the cloud.
