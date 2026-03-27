@@ -12,6 +12,14 @@ body {
         background: #111;
         color: #e8e8e8;
     }
+
+    :first-child {
+        margin-block-start: 0;
+    }
+
+    :last-child {
+        margin-block-end: 0;
+    }
 }
 
 
