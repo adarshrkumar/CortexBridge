@@ -8,5 +8,4 @@
 
 ## Next — Reach
 
-- [ ] CI integration: warn when instructions are out of sync
 - [ ] Team inheritance (org-level → repo-level → branch-level instructions)
