@@ -3,12 +3,13 @@
     "version": "0.1.0",
     "type": "module",
     "scripts": {
-        "dev": "npx tsx watch api/index.ts",
-        "dev:stdio": "npx tsx watch src/server/index.ts",
-        "build": "tsc",
+        "dev": "colors && npx tsx watch api/index.ts",
+        "dev:stdio": "colors && npx tsx watch src/server/index.ts",
+        "colors": "node ../scripts/generate-colors.mjs",
+        "build": "colors && tsc",
         "start": "node dist/api/index.js",
-        "lint": "eslint src --max-warnings 0 && stylelint \"public/**/*.css\" && tsc --noEmit",
-        "test": "npx tsx tests/index.ts",
+        "lint": "colors && eslint src --max-warnings 0 && stylelint \"public/**/*.css\" && tsc --noEmit",
+        "test": "colors && npx tsx tests/index.ts",
         "check": "npm run lint && npm test"
     },
     "dependencies": {
