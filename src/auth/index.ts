@@ -3,7 +3,7 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { jwt } from 'better-auth/plugins';
 import { oauthProvider } from '@better-auth/oauth-provider';
 import { db } from '../db/index.js';
-import * as schema from '../db/schema.js';
+import * as authSchema from '../db/auth-schema.js';
 
 if (!process.env.BETTER_AUTH_SECRET) {
     throw new Error('BETTER_AUTH_SECRET is required');
@@ -15,10 +15,10 @@ export const auth = betterAuth({
     database: drizzleAdapter(db, {
         provider: 'pg',
         schema: {
-            user: schema.user,
-            session: schema.session,
-            account: schema.account,
-            verification: schema.verification,
+            user: authSchema.user,
+            session: authSchema.session,
+            account: authSchema.account,
+            verification: authSchema.verification,
         },
     }),
     plugins: [
