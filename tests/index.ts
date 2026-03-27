@@ -6,7 +6,7 @@ const client = new Client({ name: 'test-client', version: '0.0.1' });
 
 const transport = new StdioClientTransport({
     command: 'npx',
-    args: ['tsx', 'src/index.ts'],
+    args: ['tsx', 'src/server/index.ts'],
 });
 
 await client.connect(transport);
