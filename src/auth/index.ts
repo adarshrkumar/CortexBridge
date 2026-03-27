@@ -2,7 +2,7 @@ import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { jwt } from 'better-auth/plugins';
 import { oauthProvider } from '@better-auth/oauth-provider';
-import { db } from '../db';
+import { db } from '../db/index';
 import * as schema from '../db/schema';
 
 if (!process.env.BETTER_AUTH_SECRET) {
