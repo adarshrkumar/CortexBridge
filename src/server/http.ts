@@ -1,4 +1,4 @@
-import { toNodeHandler } from 'better-auth/integrations/node';
+import { toNodeHandler } from 'better-auth/node';
 import { createMcpAuthClient } from 'better-auth/plugins/mcp/client';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
