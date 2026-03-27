@@ -13,6 +13,7 @@
       "mcp__vercel__web_fetch_vercel_url",
       "mcp__vercel__get_deployment_build_logs",
       "Bash(npx vercel:*)",
+      "Bash(vercel project:*)",
       "Bash(npm ls:*)",
       "Bash(npm dedupe:*)"
     ]
