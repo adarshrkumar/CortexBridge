@@ -1,8 +1,8 @@
-# Manifest Schema
+# Instructions Schema
 
-The manifest is stored exclusively in the CortexBridge cloud. It is the canonical source of truth for a project's agent context, served to agents at runtime via the MCP server.
+The project instructions are stored exclusively in the CortexBridge cloud and edited via the web UI. They are returned to agents at startup by the MCP server — equivalent to a shared, always-synced `AGENTS.md`.
 
-## Top-Level Structure
+## Structure
 
 ```yaml
 version: 1
@@ -11,7 +11,7 @@ project:
   description: string
   stack: string[]
 
-instructions: string    # Markdown — served to all agents via MCP
+instructions: string    # Markdown — returned to all agents via MCP
 
 sync:
   strategy: last-write-wins | manual
@@ -29,14 +29,14 @@ Metadata about the project. Displayed in the web UI.
 
 ### `instructions`
 
-Markdown served to every agent that connects via MCP. This is where cross-agent conventions, architecture summaries, and team standards live.
+Markdown returned to every agent that connects via MCP. Write it exactly as you would an `AGENTS.md` file — conventions, architecture notes, team standards.
 
 ### `sync.strategy`
 
-How conflicts are resolved when multiple writers update the manifest simultaneously. Configured via the web UI — not edited directly in the manifest.
+Configured in the web UI. Controls how simultaneous writes are resolved.
 
 - `last-write-wins` (default): the most recent write wins.
-- `manual`: conflicts are surfaced in the web UI and must be resolved explicitly.
+- `manual`: conflicts are surfaced in the UI and must be resolved explicitly.
 
 ## Example
 

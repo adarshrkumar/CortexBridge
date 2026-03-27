@@ -1,3 +1,3 @@
 # CortexBridge
 
-A cloud-synced project manifest that provides consistent AGENTS.md instructions and project context for coding agents across all products, platforms, and models.
+A cloud-synced AGENTS.md that provides consistent instructions and project context for coding agents across all products, platforms, and models.

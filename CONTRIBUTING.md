@@ -12,23 +12,21 @@ Check [ROADMAP.md](ROADMAP.md) for planned features. Open issues are the best pl
 
 ## Guidelines
 
-- **Spec changes first.** If your contribution changes the manifest schema or sync protocol, update `docs/` before touching implementation code.
-- **One adapter per PR.** New platform adapters should be submitted separately so they can be reviewed and tested in isolation.
-- **Fixture-driven tests.** Adapter tests must use manifest fixtures from `tests/fixtures/` rather than inline test data.
-- **No adapter should require network access.** If your adapter needs to fetch something, that belongs in the sync layer.
+- **Spec changes first.** If your contribution changes the instructions schema or sync protocol, update `docs/` before touching implementation code.
+- **The MCP server is read-only.** It fetches and returns instructions — no writes, no side effects.
+- **No network calls in tests.** Tests must mock the cloud store; network access belongs in the MCP server layer only.
 
 ## Commit Style
 
 Use the conventional commits format:
 
 ```text
-feat(adapter): add cursor adapter
-fix(sync): handle empty manifest on first pull
-docs(schema): document context-pack resolution order
+feat(mcp): return instructions on connect
+fix(auth): handle expired Better Auth session
+docs(schema): clarify instructions field structure
 ```
 
 ## Opening a Pull Request
 
 - Reference the issue your PR addresses.
 - Include a note in `docs/` if the change is user-visible.
-- If you're adding a new adapter, update the adapter table in [ARCHITECTURE.md](ARCHITECTURE.md).

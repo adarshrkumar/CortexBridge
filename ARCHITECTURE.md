@@ -13,13 +13,13 @@
          └──────────┬──────────┘
                     │ fetches on startup
          ┌──────────▼──────────┐
-         │     Cloud Store     │  project instructions (manifest)
+         │     Cloud Store     │  project instructions
          └─────────────────────┘
 ```
 
-The only file that lives in your repo is `.cortexconfig` — a small config pointing to the cloud project. Everything else (instructions, conventions) lives in the cloud and is served to agents via the MCP server.
+The only file that lives in your repo is `.cortexconfig` — a project ID pointer. The instructions live in the cloud, edited via the web UI, and are returned to the agent by the MCP server at startup.
 
-Any agent that supports MCP connects to CortexBridge and gets the same context. No per-platform files, no per-platform configuration.
+Any agent that supports MCP gets the same instructions. No per-platform files, no per-platform configuration.
 
 ## Components
 
@@ -27,26 +27,23 @@ Any agent that supports MCP connects to CortexBridge and gets the same context. 
 
 The only local artifact. Committed to the repo. Contains:
 
-- `project_id` — identifies the cloud manifest
+- `project_id` — identifies the project in the cloud
 
-No instructions, no context — just a pointer. Authentication is handled by Better Auth via the MCP auth flow; no token is stored in the config file.
+No instructions, no settings — just a pointer. Authentication is handled by Better Auth via the MCP auth flow.
 
-### Cloud Manifest
+### Project Instructions
 
-Lives exclusively in the CortexBridge cloud. Contains:
+Live exclusively in the CortexBridge cloud. Edited via the web UI. Returned to agents as context — equivalent to a shared, always-synced `AGENTS.md`.
 
-- Project metadata (name, description, stack)
-- Agent instructions shared across all agents
-
-See [docs/manifest-schema.md](docs/manifest-schema.md) for the full schema.
+See [docs/instructions-schema.md](docs/instructions-schema.md) for the structure.
 
 ### MCP Server
 
-The bridge between agents and the cloud. On agent startup it:
+On agent startup it:
 
 1. Reads `.cortexconfig` to get `project_id`
 2. Authenticates via Better Auth using the MCP auth flow
-3. Fetches the manifest from the cloud store
-4. Returns the instructions as context — equivalent to an `AGENTS.md` file
+3. Fetches the instructions from the cloud
+4. Returns them as context — equivalent to an `AGENTS.md` file
 
-Because CortexBridge is an MCP server, it works with any agent or IDE that supports MCP — no per-platform configuration required.
+Other project configs are provided by separate MCP tools; CortexBridge is focused solely on delivering the instructions.

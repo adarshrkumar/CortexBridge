@@ -2,7 +2,7 @@
 
 ## Overview
 
-CortexBridge uses a pull-on-startup model. The manifest lives in the cloud; agents fetch it fresh each time they start. The only local artifact is `.cortexconfig` — a lightweight pointer to the cloud project.
+On agent startup, the CortexBridge MCP server fetches the project instructions from the cloud and returns them as context. The only local artifact is `.cortexconfig` — a pointer to the project.
 
 ## Local Config File
 
@@ -13,7 +13,7 @@ project_id: acme-api
 
 The only file to commit. No instructions, no settings — just the project ID.
 
-## Pull Flow
+## Flow
 
 ```text
 Agent starts
@@ -23,7 +23,7 @@ MCP server connects
     │
     ├─ reads .cortexconfig for project_id
     ├─ authenticates via Better Auth (MCP auth flow)
-    ├─ fetches manifest from cloud store
+    ├─ fetches instructions from cloud
     └─ returns instructions as context (equivalent to AGENTS.md)
 ```
 
@@ -31,9 +31,11 @@ MCP server connects
 
 Instructions and project settings are configured via the CortexBridge web UI. The MCP server only reads — it returns context to the agent, it does not write.
 
+Other project configs (outside of instructions) are provided by separate MCP tools.
+
 ## Conflict Resolution
 
-Conflict resolution strategy is set in the web UI per project.
+Configured in the web UI per project.
 
 | Strategy | Behavior |
 | --- | --- |
