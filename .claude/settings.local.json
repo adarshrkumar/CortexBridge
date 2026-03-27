@@ -15,7 +15,8 @@
       "Bash(npx vercel:*)",
       "Bash(vercel project:*)",
       "Bash(npm ls:*)",
-      "Bash(npm dedupe:*)"
+      "Bash(npm dedupe:*)",
+      "Bash(npm create:*)"
     ]
   }
 }
