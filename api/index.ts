@@ -20,7 +20,8 @@ app.all('/api/auth/*splat', toNodeHandler(auth));
 
 // OAuth 2.1 authorization server discovery required by the MCP spec.
 // Proxied directly from Better Auth's built-in discovery endpoint.
-app.get('/.well-known/oauth-authorization-server', async (_req, res: ExpressResponse) => {
+// RFC 8414: if issuer is BASE_URL/api/auth, discovery lives at /.well-known/oauth-authorization-server/api/auth
+async function proxyWellKnown(_req: ExpressRequest, res: ExpressResponse) {
     const response = await auth.handler(
         new Request(`${BASE_URL}/api/auth/.well-known/oauth-authorization-server`)
     );
@@ -29,7 +30,10 @@ app.get('/.well-known/oauth-authorization-server', async (_req, res: ExpressResp
         .status(response.status)
         .set('Content-Type', response.headers.get('content-type') ?? 'application/json')
         .end(body);
-});
+}
+
+app.get('/.well-known/oauth-authorization-server', proxyWellKnown);
+app.get('/.well-known/oauth-authorization-server/api/auth', proxyWellKnown);
 
 // OAuth 2.1 protected resource metadata required by the MCP spec.
 app.get('/.well-known/oauth-protected-resource', (_req, res: ExpressResponse) => {
