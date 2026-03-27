@@ -33,15 +33,6 @@ Instructions and project settings are configured via the CortexBridge web UI. Th
 
 Other project configs (outside of instructions) are provided by separate MCP tools.
 
-## Conflict Resolution
-
-Configured in the web UI per project.
-
-| Strategy | Behavior |
-| --- | --- |
-| `last-write-wins` | Most recent write wins, no review required |
-| `manual` | Conflicts are surfaced in the UI and must be resolved explicitly |
-
 ## Authentication
 
 CortexBridge uses [Better Auth](https://www.better-auth.com/) with its MCP auth plugin. Authentication happens at MCP connection time — the agent is prompted to log in via the Better Auth flow if no valid session exists. No tokens are stored in `.cortexconfig` or the repo.

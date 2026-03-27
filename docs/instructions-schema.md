@@ -12,9 +12,6 @@ project:
   stack: string[]
 
 instructions: string    # Markdown — returned to all agents via MCP
-
-sync:
-  strategy: last-write-wins | manual
 ```
 
 ## Fields
@@ -31,13 +28,6 @@ Metadata about the project. Displayed in the web UI.
 
 Markdown returned to every agent that connects via MCP. Write it exactly as you would an `AGENTS.md` file — conventions, architecture notes, team standards.
 
-### `sync.strategy`
-
-Configured in the web UI. Controls how simultaneous writes are resolved.
-
-- `last-write-wins` (default): the most recent write wins.
-- `manual`: conflicts are surfaced in the UI and must be resolved explicitly.
-
 ## Example
 
 ```yaml
@@ -53,6 +43,4 @@ instructions: |
   - All database queries go through the repository layer.
   - Tests use Vitest; run `pnpm test` before committing.
 
-sync:
-  strategy: last-write-wins
 ```
