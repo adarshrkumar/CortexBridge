@@ -29,13 +29,6 @@ Every term, name, phrase, and concept used across the project.
 - Project metadata (name, description, stack)
 - Conflict resolution (simultaneous writes)
 
-## Agents / Platforms Referenced
-
-- Claude Code
-- GitHub Copilot
-- Cursor
-- Gemini
-
 ## Analogies Used
 
 - "equivalent to a shared `AGENTS.md`"

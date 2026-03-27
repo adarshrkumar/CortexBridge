@@ -2,7 +2,7 @@
 
 > A cloud-synced AGENTS.md that provides consistent instructions and project context for coding agents across all products, platforms, and models.
 
-CortexBridge solves agent context drift — when the same project is worked on by different AI coding agents (Claude Code, GitHub Copilot, Cursor, etc.) and each operates without shared standards, architecture decisions, or team conventions.
+CortexBridge solves agent context drift — when the same project is worked on by different AI coding agents and each operates without shared standards, architecture decisions, or team conventions.
 
 Your project instructions live in the cloud. A small config file in your repo tells CortexBridge which project to load. An MCP server returns the instructions to whichever agent is running — the same content that would otherwise live in a static `AGENTS.md` file, but centrally managed and always in sync.
 

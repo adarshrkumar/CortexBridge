@@ -3,18 +3,17 @@
 ## Overview
 
 ```text
-┌─────────────────────────────────────────┐
-│              Coding Agents              │
-│ (Claude Code, Copilot, Cursor, Gemini…) │
-└───────────────────┬─────────────────────┘
-                    │                       context via MCP
-┌───────────────────▼─────────────────────┐
-│               MCP Server                │ CortexBridge — the bridge
-└───────────────────┬─────────────────────┘
-                    │                       fetches on startup
-┌───────────────────▼─────────────────────┐
-│                 Cloud                   │ project instructions
-└─────────────────────────────────────────┘
+┌──────────────────┐ 
+│ Any Coding Agent │ 
+└────────┬─────────┘ 
+         │           context via MCP
+┌────────▼─────────┐ 
+│    MCP Server    │ CortexBridge — the bridge
+└────────┬─────────┘ 
+         │           fetches on startup
+┌────────▼─────────┐ 
+│      Cloud       │ project instructions
+└──────────────────┘ 
 ```
 
 The only file that lives in your repo is `.cortexconfig` — a project ID pointer. The instructions live in the cloud, edited via the web UI, and are returned to the agent by the MCP server at startup.
