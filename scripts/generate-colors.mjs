@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { join, dirname } from 'path';
+import { join, dirname, extname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -47,7 +47,7 @@ $color-${name}-dark: ${dark};
 export default function run() {
     const colors = JSON.parse(readFileSync(colorsPath, 'utf-8'));
     paths.forEach(p => {
-        const ext = p.split('.').pop();
+        const ext = extname(p).slice(1);
         writeFileSync(join(__dirname, p), `${builders[ext](colors)}\n`);
     });
 }
