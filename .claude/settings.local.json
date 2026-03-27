@@ -17,7 +17,8 @@
       "Bash(vercel env:*)",
       "Bash(npm ls:*)",
       "Bash(npm dedupe:*)",
-      "Bash(npm create:*)"
+      "Bash(npm create:*)",
+      "Bash(node scripts/generate-colors.mjs)"
     ]
   }
 }

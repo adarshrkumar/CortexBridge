@@ -1,0 +1,31 @@
+$color-background-light: #fff;
+$color-foreground-light: #111;
+$color-muted-light: #555;
+$color-border-light: #e0e0e0;
+$color-subtle-light: #f5f5f5;
+$color-faint-light: #aaa;
+
+$color-background-dark: #111;
+$color-foreground-dark: #e8e8e8;
+$color-muted-dark: #999;
+$color-border-dark: #333;
+$color-subtle-dark: #1a1a1a;
+$color-faint-dark: #555;
+
+:root {
+    --color-background: #{$color-background-light};
+    --color-foreground: #{$color-foreground-light};
+    --color-muted: #{$color-muted-light};
+    --color-border: #{$color-border-light};
+    --color-subtle: #{$color-subtle-light};
+    --color-faint: #{$color-faint-light};
+
+    @media (prefers-color-scheme: dark) {
+        --color-background: #{$color-background-dark};
+        --color-foreground: #{$color-foreground-dark};
+        --color-muted: #{$color-muted-dark};
+        --color-border: #{$color-border-dark};
+        --color-subtle: #{$color-subtle-dark};
+        --color-faint: #{$color-faint-dark};
+    }
+}
