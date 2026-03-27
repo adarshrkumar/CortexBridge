@@ -9,37 +9,23 @@ Every term, name, phrase, and concept used across the project.
 
 ## Core Concepts
 
-- Project instructions
 - Instructions
-- Instructions schema
 - MCP server
 - MCP auth flow
-- MCP connection
 
 ## Local File
 
 - `.cortexconfig`
 - `project_id` (only field)
 
-## Schema Fields
-
-- `version`
-- `project`
-- `project.name`
-- `project.description`
-- `project.stack`
-- `instructions`
-
 ## Auth
 
 - Better Auth
 - MCP auth plugin
-- MCP auth flow
-- Session
 
 ## Web UI
 
-- Create and edit project instructions
+- Create and edit instructions
 - Project metadata (name, description, stack)
 - Conflict resolution (simultaneous writes)
 
@@ -50,20 +36,15 @@ Every term, name, phrase, and concept used across the project.
 - Cursor
 - Gemini
 
-## Analogies / Descriptions
+## Analogies Used
 
 - "equivalent to a shared `AGENTS.md`"
-- "cloud-synced `AGENTS.md`"
-- "always-synced `AGENTS.md`"
-- "project ID pointer"
-- "the only local artifact"
 
 ## Planned Features
 
-- Team inheritance
-- org-level → repo-level → branch-level instructions
+- Team inheritance (org-level → repo-level → branch-level)
 
-## Doc Files
+## Files
 
 - `README.md`
 - `DESCRIPTION.md`
@@ -73,3 +54,4 @@ Every term, name, phrase, and concept used across the project.
 - `CONTRIBUTING.md`
 - `AGENTS.md`
 - `SYNC.md`
+- `AUDIT.md`
