@@ -8,7 +8,8 @@
       "Bash(npm show:*)",
       "mcp__vercel__list_teams",
       "mcp__vercel__list_projects",
-      "mcp__vercel__get_runtime_logs"
+      "mcp__vercel__get_runtime_logs",
+      "mcp__vercel__list_deployments"
     ]
   }
 }
