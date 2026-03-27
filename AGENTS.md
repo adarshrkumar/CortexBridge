@@ -25,6 +25,13 @@ ROADMAP.md           # Planned work
 - The instructions are the source of truth — see `SYNC.md` for how they are fetched and returned.
 - The MCP server is read-only; it fetches and returns instructions, it does not write.
 
+## Code Style
+
+- Single quotes for all strings
+- 4-space indentation
+- No `any` types
+- No unused variables (prefix with `_` to ignore)
+
 ## Key Constraints
 
 - The MCP server must be stateless between requests; all state lives in the cloud.
