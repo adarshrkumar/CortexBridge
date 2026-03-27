@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CortexBridge</title>
+    <meta name="description" content="Cloud-synced agent instructions via MCP server.">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>CortexBridge</h1>
+    <p>Cloud-synced agent instructions delivered via MCP server.<br>
+    One file committed. Every agent stays in sync.</p>
+
+    <h2>Setup</h2>
+    <p>Add a <code>.cortexconfig</code> to your repo:</p>
+    <pre># .cortexconfig
+project: your-project-id</pre>
+
+    <h2>How it works</h2>
+    <ul>
+        <li>The MCP server reads <code>.cortexconfig</code> on connect</li>
+        <li>Authenticates via OAuth 2.1 (Better Auth)</li>
+        <li>Fetches and returns your instructions as agent context</li>
+    </ul>
+
+    <h2>Why</h2>
+    <ul>
+        <li>Same instructions across Claude, Cursor, Copilot, Gemini</li>
+        <li>Update instructions in the web UI — no repo PRs</li>
+        <li>No tokens or secrets stored in your repo</li>
+    </ul>
+
+    <footer>CortexBridge — built on MCP · Better Auth · Neon</footer>
+</body>
+</html>
