@@ -1,11 +1,10 @@
-export type CodeStyle = {
-    type: 'ts' | 'css' | 'scss' | 'astro' | 'svelte' | 'jsx' | 'tsx' | string;
-    rule: string;
-};
+import { z } from 'zod';
+import { contextTable } from '../db/dull-schema.js';
 
-export type ProjectContext = {
-    instructions: string | null;
-    codeStyles: CodeStyle[];
-    createdAt: string;
-    updatedAt: string;
-};
+export const codeStyleSchema = z.object({
+    type: z.string(),
+    rule: z.string(),
+});
+
+export type CodeStyle = z.infer<typeof codeStyleSchema>;
+export type ProjectContext = typeof contextTable.$inferSelect;
