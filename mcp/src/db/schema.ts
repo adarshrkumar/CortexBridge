@@ -17,15 +17,19 @@ export const organization = pgTable('organization', {
     updatedAt: timestamp('updated_at').notNull(),
 });
 
+const contextColumns = {
+    instructions: text('instructions'),
+    codeStyles: jsonb('code_styles').$type<CodeStyle[]>().notNull().default([]),
+    createdAt: timestamp('created_at').notNull(),
+    updatedAt: timestamp('updated_at').notNull(),
+};
+
 export const project = pgTable('project', {
     id: text('id').primaryKey(),
     projectId: text('project_id').notNull().unique(),
     organizationId: text('organization_id')
         .notNull()
         .references(() => organization.id, { onDelete: 'cascade' }),
-    instructions: text('instructions'),
-    codeStyles: jsonb('code_styles').$type<CodeStyle[]>().notNull().default([]),
+    ...contextColumns,
     branches: jsonb('branches').$type<Record<string, ProjectContext>>().notNull().default({}),
-    createdAt: timestamp('created_at').notNull(),
-    updatedAt: timestamp('updated_at').notNull(),
 });
