@@ -54,7 +54,7 @@ ul {
 
 
 footer {
-    margin-block-start: 2.5rem;
+    margin-block-start: 2rem;
     color: #aaa;
 
     @media (prefers-color-scheme: dark) {
