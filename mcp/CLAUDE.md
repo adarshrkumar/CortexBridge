@@ -35,6 +35,7 @@ ROADMAP.md           # Planned work
 - No re-export stubs — move the actual content, never create a file that only re-exports another
 - CSS selectors must always be expanded — one property per line, never condensed on a single line
 - JSON must never combine multiple properties on one line — one property per line always
+- Function call arguments must always be expanded — one argument per line when wrapped, never condensed on a single line
 
 ## Verification
 
