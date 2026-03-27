@@ -10,8 +10,7 @@ Every term, name, phrase, and concept used across the project.
 ## Core Concepts
 
 - Project instructions
-- Cloud-hosted instructions
-- Cloud (where instructions live)
+- Instructions
 - Instructions schema
 - MCP server
 - MCP auth flow

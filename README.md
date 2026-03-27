@@ -17,7 +17,7 @@ Your project instructions live in the cloud. A small config file in your repo te
 
 | Concept | Description |
 | --- | --- |
-| **Project instructions** | Cloud-hosted agent context — the equivalent of a shared `AGENTS.md` |
+| **Project instructions** | Agent context stored in the cloud — the equivalent of a shared `AGENTS.md` |
 | **Config file** | `.cortexconfig` — the only file committed to your repo; contains the project ID |
 | **MCP server** | Fetches and returns the instructions to the agent at startup |
 

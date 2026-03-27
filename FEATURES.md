@@ -2,7 +2,7 @@
 
 ## Core
 
-- Cloud-hosted project instructions (equivalent to a shared `AGENTS.md`)
+- Project instructions stored in the cloud (equivalent to a shared `AGENTS.md`)
 - MCP server that returns instructions to any connected agent on startup
 - `.cortexconfig` — a single committed file containing only the project ID
 - Better Auth via MCP auth flow — no tokens stored in the repo
