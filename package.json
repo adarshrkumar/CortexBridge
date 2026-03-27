@@ -7,7 +7,7 @@
         "dev:stdio": "npx tsx watch src/server/index.ts",
         "build": "tsc",
         "start": "node dist/api/index.js",
-        "lint": "eslint src --max-warnings 0 && tsc --noEmit",
+        "lint": "eslint src --max-warnings 0 && stylelint \"public/**/*.css\" && tsc --noEmit",
         "test": "npx tsx tests/index.ts",
         "check": "npm run lint && npm test"
     },
@@ -28,6 +28,8 @@
         "@typescript-eslint/parser": "^8.57.2",
         "drizzle-kit": "^0.31.10",
         "eslint": "^10.1.0",
+        "stylelint": "^17.6.0",
+        "stylelint-config-standard": "^40.0.0",
         "tsx": "^4.19.3",
         "typescript": "^5.8.2"
     }
