@@ -1,0 +1,26 @@
+{
+    "background": {
+        "light": "#fff",
+        "dark": "#111"
+    },
+    "foreground": {
+        "light": "#111",
+        "dark": "#e8e8e8"
+    },
+    "muted": {
+        "light": "#555",
+        "dark": "#999"
+    },
+    "border": {
+        "light": "#e0e0e0",
+        "dark": "#333"
+    },
+    "subtle": {
+        "light": "#f5f5f5",
+        "dark": "#1a1a1a"
+    },
+    "faint": {
+        "light": "#aaa",
+        "dark": "#555"
+    }
+}
