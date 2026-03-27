@@ -13,11 +13,11 @@
          └──────────┬──────────┘
                     │ fetches on startup
          ┌──────────▼──────────┐
-         │     Cloud Store     │  canonical manifest (instructions, context, packs)
+         │     Cloud Store     │  project instructions (manifest)
          └─────────────────────┘
 ```
 
-The only file that lives in your repo is `.cortexconfig` — a small config pointing to the cloud project. Everything else (instructions, conventions, context packs) lives in the cloud and is served to agents via the MCP server.
+The only file that lives in your repo is `.cortexconfig` — a small config pointing to the cloud project. Everything else (instructions, conventions) lives in the cloud and is served to agents via the MCP server.
 
 Any agent that supports MCP connects to CortexBridge and gets the same context. No per-platform files, no per-platform configuration.
 
@@ -37,7 +37,6 @@ Lives exclusively in the CortexBridge cloud. Contains:
 
 - Project metadata (name, description, stack)
 - Agent instructions shared across all agents
-- Context pack references
 
 See [docs/manifest-schema.md](docs/manifest-schema.md) for the full schema.
 
@@ -48,11 +47,6 @@ The bridge between agents and the cloud. On agent startup it:
 1. Reads `.cortexconfig` to get `project_id`
 2. Authenticates via Better Auth using the MCP auth flow
 3. Fetches the manifest from the cloud store
-4. Resolves any referenced context packs
-5. Exposes the resolved context to the agent via MCP tools/resources
+4. Returns the instructions as context — equivalent to an `AGENTS.md` file
 
 Because CortexBridge is an MCP server, it works with any agent or IDE that supports MCP — no per-platform configuration required.
-
-### Context Packs
-
-Reusable instruction bundles stored in the CortexBridge cloud registry (e.g. "typescript-strict", "postgres-conventions"). Referenced from the manifest and resolved server-side before context is served to agents.

@@ -2,18 +2,16 @@
 
 ## Overview
 
-CortexBridge uses a pull-on-startup model. The manifest lives in the cloud; agents fetch it fresh each time they start. The only local artifact is a lightweight config file that tells the bridge where to find the manifest.
+CortexBridge uses a pull-on-startup model. The manifest lives in the cloud; agents fetch it fresh each time they start. The only local artifact is `.cortexconfig` — a lightweight pointer to the cloud project.
 
 ## Local Config File
-
-A small config file (`.cortexconfig`) lives in the project root or home directory. It contains only the pointer to the cloud manifest — no instructions, no context.
 
 ```yaml
 # .cortexconfig
 project_id: acme-api
 ```
 
-Everything else — instructions, context packs, auth — lives outside the repo. Authentication is handled by Better Auth via the MCP auth flow at runtime.
+The only file to commit. No instructions, no settings — just the project ID.
 
 ## Pull Flow
 
@@ -26,22 +24,21 @@ MCP server connects
     ├─ reads .cortexconfig for project_id
     ├─ authenticates via Better Auth (MCP auth flow)
     ├─ fetches manifest from cloud store
-    ├─ resolves context pack references
-    └─ serves context to agent via MCP tools/resources
+    └─ returns instructions as context (equivalent to AGENTS.md)
 ```
 
-The only file to commit is `.cortexconfig`.
+## Configuration
 
-## Update Flow
-
-Manifest updates happen via the CortexBridge web UI or API — not by editing local files. All writes are authenticated via Better Auth before being accepted by the cloud store.
+Instructions and project settings are configured via the CortexBridge web UI. The MCP server only reads — it returns context to the agent, it does not write.
 
 ## Conflict Resolution
 
+Conflict resolution strategy is set in the web UI per project.
+
 | Strategy | Behavior |
 | --- | --- |
-| `last-write-wins` | Most recent push is accepted without review |
-| `manual` | Conflict is stored; next puller must resolve before pull succeeds |
+| `last-write-wins` | Most recent write wins, no review required |
+| `manual` | Conflicts are surfaced in the UI and must be resolved explicitly |
 
 ## Authentication
 
