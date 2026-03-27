@@ -4,7 +4,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import express, { Request as ExpressRequest, Response as ExpressResponse } from 'express';
 import { z } from 'zod';
-import { auth } from '../src/auth/index';
+import { auth } from '../src/auth/index.js';
 
 const PORT = parseInt(process.env.PORT ?? '3000', 10);
 const BASE_URL = process.env.BETTER_AUTH_URL ?? `http://localhost:${PORT}`;
