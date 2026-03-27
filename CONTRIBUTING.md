@@ -14,7 +14,6 @@ Check [ROADMAP.md](ROADMAP.md) for planned features. Open issues are the best pl
 
 - **Spec changes first.** If your contribution changes the instructions schema or sync protocol, update `docs/` before touching implementation code.
 - **The MCP server is read-only.** It fetches and returns instructions — no writes, no side effects.
-- **No network calls in tests.** Tests must mock the cloud store; network access belongs in the MCP server layer only.
 
 ## Commit Style
 
