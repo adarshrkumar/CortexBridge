@@ -5,7 +5,7 @@ import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/
 import { createMcpExpressApp } from '@modelcontextprotocol/sdk/server/express.js';
 import { Request as ExpressRequest, Response as ExpressResponse } from 'express';
 import { z } from 'zod';
-import { auth } from '../auth/index.js';
+import { auth } from '../src/auth/index.js';
 
 const PORT = parseInt(process.env.PORT ?? '3000', 10);
 const BASE_URL = process.env.BETTER_AUTH_URL ?? `http://localhost:${PORT}`;
@@ -106,13 +106,10 @@ function createMcpServer(): McpServer {
     return server;
 }
 
-// Listen locally when not running on Vercel.
-if (!process.env.VERCEL) {
-    app.listen(PORT, () => {
-        console.log(`CortexBridge listening on ${BASE_URL}`);
-        console.log(`  Auth:  ${BASE_URL}/api/auth`);
-        console.log(`  MCP:   ${BASE_URL}/mcp`);
-    });
-}
+app.listen(PORT, () => {
+    console.log(`CortexBridge listening on ${BASE_URL}`);
+    console.log(`  Auth:  ${BASE_URL}/api/auth`);
+    console.log(`  MCP:   ${BASE_URL}/mcp`);
+});
 
 export default app;

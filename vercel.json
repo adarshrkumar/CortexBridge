@@ -1,6 +1,3 @@
 {
-    "functions": {
-        "src/server/http.ts": {}
-    },
-    "rewrites": [{ "source": "/(.*)", "destination": "/src/server/http" }]
+    "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
 }
