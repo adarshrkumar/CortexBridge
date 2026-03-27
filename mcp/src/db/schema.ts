@@ -1,6 +1,6 @@
 import { pgTable, text, timestamp, jsonb } from 'drizzle-orm/pg-core';
 import { user } from './auth-schema.js';
-import type { CodeStyle } from '../lib/types.js';
+import type { CodeStyle, ProjectContext } from '../lib/types.js';
 
 export const organization = pgTable('organization', {
     id: text('id').primaryKey(),
@@ -25,6 +25,7 @@ export const project = pgTable('project', {
         .references(() => organization.id, { onDelete: 'cascade' }),
     instructions: text('instructions'),
     codeStyles: jsonb('code_styles').$type<CodeStyle[]>().notNull().default([]),
+    branches: jsonb('branches').$type<Record<string, ProjectContext>>().notNull().default({}),
     createdAt: timestamp('created_at').notNull(),
     updatedAt: timestamp('updated_at').notNull(),
 });
