@@ -8,6 +8,11 @@ body {
     background: #fff;
     color: #111;
     color-scheme: light dark;
+
+    @media (prefers-color-scheme: dark) {
+        background: #111;
+        color: #e8e8e8;
+    }
 }
 
 h1 {
@@ -25,6 +30,10 @@ h2 {
 p {
     color: #555;
     margin-bottom: 16px;
+
+    @media (prefers-color-scheme: dark) {
+        color: #999;
+    }
 }
 
 pre {
@@ -34,11 +43,20 @@ pre {
     font-size: 13px;
     overflow-x: auto;
     margin: 16px 0;
+
+    @media (prefers-color-scheme: dark) {
+        background: #1a1a1a;
+        border-color: #333;
+    }
 }
 
 ul {
     color: #555;
     padding-left: 20px;
+
+    @media (prefers-color-scheme: dark) {
+        color: #999;
+    }
 }
 
 li {
@@ -49,28 +67,8 @@ footer {
     margin-top: 80px;
     color: #aaa;
     font-size: 12px;
-}
 
-@media (prefers-color-scheme: dark) {
-    body {
-        background: #111;
-        color: #e8e8e8;
-    }
-
-    p {
-        color: #999;
-    }
-
-    pre {
-        background: #1a1a1a;
-        border-color: #333;
-    }
-
-    ul {
-        color: #999;
-    }
-
-    footer {
+    @media (prefers-color-scheme: dark) {
         color: #555;
     }
 }
