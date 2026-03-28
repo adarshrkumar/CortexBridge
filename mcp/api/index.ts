@@ -32,7 +32,7 @@ app.get('/.well-known/oauth-authorization-server', proxyWellKnown);
 app.get('/.well-known/oauth-authorization-server/api/auth', proxyWellKnown);
 
 // OAuth 2.1 protected resource metadata required by the MCP spec.
-app.get('/.well-known/oauth-protected-resource', (_req, res: ExpressResponse) => {
+app.get('/.well-known/oauth-protected-resource', (_req, res) => {
     res.json({
         resource: MCP_URL,
         authorization_servers: [AUTH_URL],
