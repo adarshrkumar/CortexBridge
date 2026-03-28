@@ -19,6 +19,8 @@ export const auth = betterAuth({
     trustedOrigins: [
         `https://${config.subdomains.app}.${domain}`,
         `https://${config.subdomains.mcp}.${domain}`,
+        'http://localhost:4321',
+        'http://localhost:3000',
     ],
     database: drizzleAdapter(db, {
         provider: 'pg',
