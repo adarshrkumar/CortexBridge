@@ -39,7 +39,6 @@ export const auth = betterAuth({
         defaultCookieAttributes: {
             sameSite: 'none',
             secure: true,
-            partitioned: true,
         },
     },
     emailAndPassword: {
@@ -57,6 +56,9 @@ export const auth = betterAuth({
             loginPage: `https://${config.subdomains.app}.${domain}/account/login`,
             consentPage: `https://${config.subdomains.app}.${domain}/account/login`,
             scopes: ['openid', 'profile', 'email', 'offline_access'],
+            silenceWarnings: {
+                oauthAuthServerConfig: true,
+            },
         }),
     ],
 });
