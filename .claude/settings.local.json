@@ -20,7 +20,8 @@
       "Bash(npm dedupe:*)",
       "Bash(npm create:*)",
       "Bash(npm uninstall:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(wait)"
     ]
   }
 }

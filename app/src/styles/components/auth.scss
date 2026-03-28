@@ -23,7 +23,6 @@
         aspect-ratio: 1;
         width: 4rem;
         background-image: radial-gradient(circle, var(--color-faint), transparent);
-        border-radius: $border-radius-circle;
         translate: -50% -50%;
         z-index: -1;
     }

@@ -61,7 +61,7 @@ Generated outputs:
 - CSS properties must follow the order defined in `styles/property-order.json`
 - `display` with values `block`, `inline`, `inline-block`, or `contents` goes at the very top of a rule, before `box-sizing`; `display: flex`, `display: grid`, or other ones go just before the relevant `flex-*` or `grid-*` properties
 - Never declare `font-weight: normal` or `font-weight: 400` — omit it entirely if it is already the inherited default
-- Client-side scripts must live in `src/scripts/` as `.astro` files and be imported as Astro components — import variable must be named `{CallerFileName}Script` (e.g. `Auth.astro` imports as `AuthScript`) — no inline `<script>` tags in layouts, pages, or components
+- Client-side scripts must live in `src/scripts/` as `.astro` files and be imported as Astro components — the script file name must match the importing component's file name (e.g. `Auth.astro` uses `scripts/Auth.astro`) — import variable must be named `{CallerFileName}Script` (e.g. `Auth.astro` imports as `AuthScript`) — no inline `<script>` tags in layouts, pages, or components
 - JSON must never combine multiple properties on one line — one property per line always
 - Function call arguments must always be expanded — one argument per line when wrapped, never condensed on a single line
 

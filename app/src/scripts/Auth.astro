@@ -1,0 +1,76 @@
+<script>
+    import { createAuthClient } from 'better-auth/client';
+
+    const authClient = createAuthClient();
+
+    const auth = document.querySelector<HTMLElement>('.auth');
+
+    if (auth) {
+        const content = auth.querySelector<HTMLElement>('.auth__content');
+        const threshold = 50;
+
+        document.addEventListener('mousemove', (e) => {
+            const authRect = auth.getBoundingClientRect();
+            const contentRect = content?.getBoundingClientRect();
+
+            const rawX = e.clientX - authRect.left;
+            const rawY = e.clientY - authRect.top;
+
+            const inside = rawX >= 0 && rawX <= authRect.width && rawY >= 0 && rawY <= authRect.height;
+            const ox = inside ? 0 : Math.max(0, rawX < 0 ? -rawX : rawX - authRect.width);
+            const oy = inside ? 0 : Math.max(0, rawY < 0 ? -rawY : rawY - authRect.height);
+            const distToEdge = inside
+                ? Math.min(rawX, authRect.width - rawX, rawY, authRect.height - rawY)
+                : Math.sqrt(ox * ox + oy * oy);
+
+            if (distToEdge > threshold) {
+                auth.style.removeProperty('--x');
+                auth.style.removeProperty('--y');
+                return;
+            }
+
+            const cx = Math.max(0, Math.min(authRect.width, rawX));
+            const cy = Math.max(0, Math.min(authRect.height, rawY));
+
+            const distLeft = cx;
+            const distRight = authRect.width - cx;
+            const distTop = cy;
+            const distBottom = authRect.height - cy;
+            const minDist = Math.min(distLeft, distRight, distTop, distBottom);
+
+            const innerLeft = contentRect ? contentRect.left - authRect.left : 0;
+            const innerRight = contentRect ? contentRect.right - authRect.left : authRect.width;
+            const innerTop = contentRect ? contentRect.top - authRect.top : 0;
+            const innerBottom = contentRect ? contentRect.bottom - authRect.top : authRect.height;
+
+            let bx = cx;
+            let by = cy;
+
+            if (minDist === distLeft) {
+                bx = 0;
+                by = Math.max(innerTop, Math.min(innerBottom, cy));
+            } else if (minDist === distRight) {
+                bx = authRect.width;
+                by = Math.max(innerTop, Math.min(innerBottom, cy));
+            } else if (minDist === distTop) {
+                by = 0;
+                bx = Math.max(innerLeft, Math.min(innerRight, cx));
+            } else {
+                by = authRect.height;
+                bx = Math.max(innerLeft, Math.min(innerRight, cx));
+            }
+
+            auth.style.setProperty('--x', `${bx}px`);
+            auth.style.setProperty('--y', `${by}px`);
+        });
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('[data-provider]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+            await authClient.signIn.social({
+                provider: btn.dataset.provider as 'google' | 'github',
+                callbackURL: '/',
+            });
+        });
+    });
+</script>
