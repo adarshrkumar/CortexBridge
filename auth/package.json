@@ -12,6 +12,7 @@
     "dependencies": {
         "@better-auth/oauth-provider": "^1.5.6",
         "@neondatabase/serverless": "^1.0.2",
+        "@opentelemetry/api": "^1.9.1",
         "better-auth": "^1.5.6",
         "drizzle-orm": "^0.45.1",
         "express": "^5.2.1",
