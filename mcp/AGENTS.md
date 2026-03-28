@@ -1,29 +1,34 @@
-# Agent Instructions — CortexBridge
+# Agent Instructions — CortexBridge MCP
 
-This file provides context for AI coding agents working on the CortexBridge codebase itself.
+This file provides context for AI coding agents working on the `mcp` workspace.
 
-## Project Purpose
+## What This Package Does
 
-CortexBridge is a cloud-synced `AGENTS.md` delivered via an MCP server. It gives coding agents consistent, authoritative instructions regardless of which agent, IDE, or model is being used. The instructions live in the cloud; the only local file is `.cortexconfig`, a project ID pointer.
+The MCP server exposes two tools — `get-instructions` and `get-code-styles` — over OAuth 2.1-protected HTTP (`api/index.ts`) and stdio (`src/server/index.ts`). It fetches per-org/project/branch instructions from cloud storage and returns them to the calling agent.
 
-## Repository Layout
+## Package Layout
 
 ```text
-docs/                # Specification and reference documentation
-src/                 # Implementation source (MCP server, cloud sync)
-tests/               # Test suite
-.cortexconfig        # Project ID pointer — CortexBridge uses itself
-AGENTS.md            # This file
-ARCHITECTURE.md      # System design
-CONTRIBUTING.md      # Contribution guide
-ROADMAP.md           # Planned work
+api/index.ts         # HTTP server — Express + Better Auth + StreamableHTTP transport
+src/server/index.ts  # Stdio server — for local/CLI use
+tests/index.ts       # Integration tests
+public/              # Static assets served at root (colors.css, style.css, index.html)
+tsconfig.json        # TypeScript config
+vercel.json          # Vercel deployment config
 ```
 
-## Conventions
+## Architecture
 
-- All specification documents live in `docs/` as Markdown.
-- The instructions are the source of truth — see `SYNC.md` for how they are fetched and returned.
-- The MCP server is read-only; it fetches and returns instructions, it does not write.
+- **Two entry points**: `api/index.ts` (HTTP/Vercel) and `src/server/index.ts` (stdio). Tool logic is currently duplicated between them — keep them in sync until a shared `src/tools/` layer is extracted.
+- **Stateless by design**: `sessionIdGenerator: undefined` on the transport — no in-memory session state. Every request is independent.
+- **Auth**: Better Auth handles OAuth 2.1 (authorization server + token verification). The MCP endpoint at `/mcp` is protected by `mcpAuth.middleware()`. Org identity is resolved from the verified session — never trust client-supplied org values.
+- **Tools**: Each tool receives `project` (from `.cortexconfig`) and `git` state. The org is resolved server-side from the session.
+
+## Current TODOs
+
+- Resolve org from the verified Better Auth session (currently hardcoded to `'default-org'`)
+- Fetch instructions and code styles from cloud storage (currently returns placeholder text)
+- Extract shared tool definitions out of both entry points into `src/tools/`
 
 ## Code Style
 
@@ -34,12 +39,6 @@ ROADMAP.md           # Planned work
 - Never create a function just to wrap a single line of code
 - Never assign a simple condition to an intermediate boolean variable — use the condition inline (e.g. `mode === 'login'`, not `const isLogin = mode === 'login'`)
 - No re-export stubs — move the actual content, never create a file that only re-exports another
-- Never use Tailwind CSS or any utility-first CSS framework — all styles must be written in SCSS
-- Never use Tailwind-style naming conventions (e.g. `mt-4`, `text-sm`, `flex`) either
-- For state-based styling, use data attributes or ARIA attributes (e.g. `[aria-disabled]`, `[data-state="open"]`) — never BEM modifier classes
-- CSS selectors must always be expanded — one property per line, never condensed on a single line
-- JSON must never combine multiple properties on one line — one property per line always
-- Function call arguments must always be expanded — one argument per line when wrapped, never condensed on a single line
 
 ## Verification
 
@@ -49,3 +48,4 @@ ROADMAP.md           # Planned work
 
 - The MCP server must be stateless between requests; all state lives in the cloud.
 - Authentication is handled exclusively by Better Auth via the MCP auth flow.
+- Never expose org/project data without a verified session.
