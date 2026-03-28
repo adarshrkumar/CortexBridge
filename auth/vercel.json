@@ -1,8 +1,14 @@
 {
+    "installCommand": "cd .. && npm install",
     "functions": {
         "api/index.ts": {
             "maxDuration": 30
         }
     },
-    "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/api"
+        }
+    ]
 }
