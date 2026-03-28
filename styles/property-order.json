@@ -1,7 +1,10 @@
 {
     "Top Level": [
+        "content",
         "list-style",
         "flex",
+        "float",
+        "clear",
         "resize"
     ],
     "Positioning": [
@@ -176,9 +179,6 @@
         "grid-area"
     ],
     "General Layout": [
-        "content",
-        "float",
-        "clear",
         "shape-outside",
         "shape-margin",
         "shape-image-threshold",

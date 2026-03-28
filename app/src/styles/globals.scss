@@ -20,6 +20,14 @@ body {
     font-family: 'Montserrat', 'Gill Sans', 'Segoe UI', Arial, sans-serif;
     font-size: 0.9375rem;
     line-height: 1.5;
+
+    :first-child {
+        margin-block-start: 0;
+    }
+
+    :last-child {
+        margin-block-end: 0;
+    }
 }
 
 a {

@@ -1,0 +1,14 @@
+<script>
+    import { createAuthClient } from 'better-auth/client';
+
+    const authClient = createAuthClient();
+
+    document.querySelectorAll<HTMLButtonElement>('[data-provider]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+            await authClient.signIn.social({
+                provider: btn.dataset.provider as 'google' | 'github',
+                callbackURL: '/',
+            });
+        });
+    });
+</script>
