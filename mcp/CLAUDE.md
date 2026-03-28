@@ -33,6 +33,9 @@ ROADMAP.md           # Planned work
 - No unused variables (prefix with `_` to ignore)
 - Never create a function just to wrap a single line of code
 - No re-export stubs — move the actual content, never create a file that only re-exports another
+- Never use Tailwind CSS or any utility-first CSS framework — all styles must be written in SCSS
+- Never use Tailwind-style naming conventions (e.g. `mt-4`, `text-sm`, `flex`) either
+- For state-based styling, use data attributes or ARIA attributes (e.g. `[aria-disabled]`, `[data-state="open"]`) — never BEM modifier classes
 - CSS selectors must always be expanded — one property per line, never condensed on a single line
 - JSON must never combine multiple properties on one line — one property per line always
 - Function call arguments must always be expanded — one argument per line when wrapped, never condensed on a single line

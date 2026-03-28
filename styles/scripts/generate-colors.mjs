@@ -6,8 +6,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const colorsPath = join(__dirname, '../colors.json');
 
 const paths = [
-    '../mcp/public/colors.css',
-    '../app/src/styles/variables/colors.scss',
+    '../../mcp/public/colors.css',
+    '../../app/src/styles/variables/colors.scss',
 ];
 
 const builders = {

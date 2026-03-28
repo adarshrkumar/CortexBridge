@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "type": "module",
     "scripts": {
-        "colors": "node ../scripts/generate-colors.mjs",
+        "colors": "node ../styles/scripts/generate-colors.mjs",
         "dev": "npm run colors && npx tsx watch api/index.ts",
         "dev:stdio": "npm run colors && npx tsx watch src/server/index.ts",
         "build": "npm run colors && tsc",
@@ -34,6 +34,7 @@
         "eslint": "^10.1.0",
         "stylelint": "^17.6.0",
         "stylelint-config-standard": "^40.0.0",
+        "stylelint-order": "^8.1.1",
         "tsx": "^4.19.3",
         "typescript": "^5.8.2"
     }

@@ -18,7 +18,9 @@
       "Bash(npm ls:*)",
       "Bash(npm dedupe:*)",
       "Bash(npm create:*)",
-      "Bash(node scripts/generate-colors.mjs)"
+      "Bash(npm uninstall:*)",
+      "Bash(ls:*)",
+      "Bash(find /tmp -name *.scss -type f)"
     ]
   }
 }

@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import run from '../scripts/generate-colors.mjs';
+import run from '../styles/scripts/generate-colors.mjs';
 
 run();
 
