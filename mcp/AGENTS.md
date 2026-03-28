@@ -32,6 +32,7 @@ ROADMAP.md           # Planned work
 - No `any` types
 - No unused variables (prefix with `_` to ignore)
 - Never create a function just to wrap a single line of code
+- Never assign a simple condition to an intermediate boolean variable — use the condition inline (e.g. `mode === 'login'`, not `const isLogin = mode === 'login'`)
 - No re-export stubs — move the actual content, never create a file that only re-exports another
 - Never use Tailwind CSS or any utility-first CSS framework — all styles must be written in SCSS
 - Never use Tailwind-style naming conventions (e.g. `mt-4`, `text-sm`, `flex`) either

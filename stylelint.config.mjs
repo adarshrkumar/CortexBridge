@@ -23,6 +23,9 @@ export default {
             },
         ],
         'font-family-name-quotes': null,
+        'declaration-property-value-disallowed-list': {
+            flex: ['row', 'column', 'row-reverse', 'column-reverse'],
+        },
         'order/properties-order': Object.values(propertyOrder).flat(),
     },
 };
