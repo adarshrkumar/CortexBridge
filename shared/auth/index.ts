@@ -47,8 +47,8 @@ export const auth = betterAuth({
     plugins: [
         jwt(),
         oauthProvider({
-            loginPage: '/sign-in',
-            consentPage: '/consent',
+            loginPage: `https://${config.subdomains.app}.${domain}/login`,
+            consentPage: `https://${config.subdomains.app}.${domain}/consent`,
             scopes: ['openid', 'profile', 'email', 'offline_access'],
         }),
     ],
