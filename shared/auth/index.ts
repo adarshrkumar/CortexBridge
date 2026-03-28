@@ -62,3 +62,8 @@ export const auth = betterAuth({
         }),
     ],
 });
+
+export async function isLoggedIn(headers: Headers): Promise<boolean> {
+    const session = await auth.api.getSession({ headers });
+    return session !== null;
+}

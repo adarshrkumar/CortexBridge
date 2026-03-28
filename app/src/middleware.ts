@@ -1,19 +1,21 @@
 import { defineMiddleware } from 'astro:middleware';
-import { requireAuth, alreadyAuthed } from './lib/auth';
+import { isLoggedIn } from '../../shared/auth/index.js';
 
-const guestOnlyRoutes = ['/account/login', '/account/register'];
-const authOnlyRoutes = ['/account/logout'];
+const loginPageRoutes = ['/account/login', '/account/register'];
 
 export const onRequest = defineMiddleware(async (context, next) => {
     const { pathname } = context.url;
+    const loggedIn = await isLoggedIn(context.request.headers);
 
-    if (guestOnlyRoutes.includes(pathname)) {
-        return await alreadyAuthed(context) ?? next();
+    if (loginPageRoutes.includes(pathname)) {
+        if (loggedIn) {
+            return context.redirect('/');
+        }
+        return next();
     }
 
-    if (authOnlyRoutes.includes(pathname)) {
-        return await requireAuth(context) ?? next();
+    if (!loggedIn) {
+        return context.redirect('/account/login');
     }
-
-    return await requireAuth(context) ?? next();
+    return next();
 });
