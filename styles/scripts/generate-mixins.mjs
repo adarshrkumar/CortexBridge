@@ -10,7 +10,7 @@ const paths = [
 ];
 
 export default function run() {
-    const { breakpoints } = JSON.parse(readFileSync(mixinsPath, 'utf-8'));
+    const { breakpoints = {} } = JSON.parse(readFileSync(mixinsPath, 'utf-8'));
 
     const str = Object.entries(breakpoints).map(([name, value]) => (
 `@mixin ${name} {
