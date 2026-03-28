@@ -12,7 +12,10 @@ const paths = [
 export default function run() {
     const { breakpoints = {} } = JSON.parse(readFileSync(mixinsPath, 'utf-8'));
 
-    const str = Object.entries(breakpoints).map(([name, value]) => (
+    const entries = Object.entries(breakpoints);
+    if (entries.length === 0) return;
+
+    const str = entries.map(([name, value]) => (
 `@mixin ${name} {
     @media (min-width: ${value}) {
         @content;

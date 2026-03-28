@@ -1,14 +1,14 @@
 @use './variables/colors.scss' as *;
 
 body {
-    font-family: 'Montserrat', 'Gill Sans', 'Segoe UI', Arial, sans-serif;
-    line-height: 1.7;
-    max-width: 45rem;
     margin: 2.5rem auto;
     padding: 1.5rem;
-    background: var(--color-background);
+    max-width: 45rem;
     color: var(--color-foreground);
     color-scheme: light dark;
+    background: var(--color-background);
+    font-family: 'Montserrat', 'Gill Sans', 'Segoe UI', Arial, sans-serif;
+    line-height: 1.7;
 
     :first-child {
         margin-block-start: 0;
@@ -24,15 +24,15 @@ p {
 }
 
 pre {
+    padding: 1rem;
     background: var(--color-subtle);
     border: 1px solid var(--color-border);
-    padding: 1rem;
     overflow-x: auto;
 }
 
 ul {
-    color: var(--color-muted);
     padding-inline-start: 1.25rem;
+    color: var(--color-muted);
 }
 
 footer {
