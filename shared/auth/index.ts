@@ -36,6 +36,11 @@ export const auth = betterAuth({
             enabled: true,
             domain: `.${domain}`,
         },
+        defaultCookieAttributes: {
+            sameSite: 'none',
+            secure: true,
+            partitioned: true,
+        },
     },
     emailAndPassword: {
         enabled: true,
