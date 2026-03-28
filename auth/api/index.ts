@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.all('/api/auth/*splat', toNodeHandler(auth));
 
-app.all('*', (req, res) => {
+app.all('/*splat', (req, res) => {
     res.status(302).redirect(`https://${config.subdomains.app}.${domain}${`/${req.originalUrl}`.replaceAll('//', '/')}`);
 });
 
