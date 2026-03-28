@@ -1,19 +1,35 @@
 @use '../variables/tokens' as *;
 
 .auth {
+    position: relative;
     width: 100%;
     max-width: 28rem;
     padding: 1px;
-    background: var(--color-border);
+    background-color: var(--color-border);
     border-radius: $border-radius-large;
+    isolation: isolate;
+    overflow: hidden;
 
     body:has(&) {
         place-content: center;
         place-items: center
     }
 
+    &::after {
+        content: '';
+        position: absolute;
+        top: clamp(0%, var(--y, 50%), 100%);
+        left: clamp(0%, var(--x, 50%), 100%);
+        aspect-ratio: 1;
+        width: 4rem;
+        background-image: radial-gradient(circle, var(--color-faint), transparent);
+        border-radius: $border-radius-circle;
+        translate: -50% -50%;
+        z-index: -1;
+    }
+
     &__content {
-        background: var(--color-subtle);
+        background-color: var(--color-subtle);
         border-radius: $border-radius-large;
         display: flex;
         padding: 2rem;
@@ -47,7 +63,7 @@
         padding: $spacing-small 0.75rem;
         width: 100%;
         color: var(--color-foreground);
-        background: var(--color-background);
+        background-color: var(--color-background);
         border: 1px solid var(--color-border);
         border-radius: $border-radius-normal;
         font-size: $font-size-normal;
@@ -61,7 +77,7 @@
     &__submit {
         padding: $spacing-small 1rem;
         color: var(--color-background);
-        background: var(--color-foreground);
+        background-color: var(--color-foreground);
         border: none;
         border-radius: $border-radius-normal;
         font-size: $font-size-normal;
@@ -85,7 +101,7 @@
             content: '';
             flex: 1;
             height: 1px;
-            background: var(--color-border);
+            background-color: var(--color-border);
         }
     }
 
@@ -98,7 +114,7 @@
     &__provider {
         padding: $spacing-small $spacing-normal;
         width: 100%;
-        background: transparent;
+        background-color: transparent;
         border: 1px solid var(--color-border);
         border-radius: $border-radius-normal;
         display: flex;
@@ -109,7 +125,7 @@
         cursor: pointer;
 
         &:hover {
-            background: var(--color-subtle);
+            background-color: var(--color-subtle);
         }
     }
 
