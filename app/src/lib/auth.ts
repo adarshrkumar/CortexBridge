@@ -16,3 +16,10 @@ export async function requireAuth(context: RequestContext): Promise<Response | v
         return context.redirect('/account/login');
     }
 }
+
+export async function alreadyAuthed(context: RequestContext): Promise<Response | void> {
+    const session = await auth.api.getSession({ headers: context.request.headers });
+    if (session) {
+        return context.redirect('/');
+    }
+}
