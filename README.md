@@ -1,6 +1,6 @@
 # CortexBridge
 
-> A cloud-synced AGENTS.md that provides consistent instructions and project context for coding agents across all products, platforms, and models.
+> A cloud-synced AGENTS.md that provides consistent instructions and project context for coding agents across all harnesses, platforms, and models.
 
 CortexBridge solves agent context drift — when the same project is worked on by different AI coding agents and each operates without shared standards, architecture decisions, or team conventions.
 
@@ -11,7 +11,7 @@ Your project instructions live in the cloud. A small config file in your repo te
 1. A **config file** (`.cortexconfig`) lives in your repo — just a project ID.
 2. The **project instructions** live exclusively in the cloud, edited via the web UI.
 3. The **MCP server** connects on agent startup and returns the instructions as context.
-4. Every coding agent — regardless of product or model — gets the same authoritative instructions.
+4. Every coding agent — regardless of harness or model — gets the same authoritative instructions.
 
 ## Key Concepts
 

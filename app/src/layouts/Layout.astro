@@ -1,5 +1,15 @@
 ---
 import '../styles/globals.scss';
+import config from '../../../config';
+
+let { title } = Astro.props;
+if (!title || title === undefined || title === null || title === '' || title.toLowerCase() === 'home') {
+    title = config.name;
+}
+else {
+    title = `${title} | ${config.name}`;
+}
+
 ---
 
 <html lang="en">
@@ -7,7 +17,9 @@ import '../styles/globals.scss';
         <meta charset="utf-8" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
+        <meta name="description" content={config.description} />
         <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
         <slot name="head" />
     </head>
     <body>

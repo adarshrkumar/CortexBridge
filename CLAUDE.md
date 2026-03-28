@@ -4,7 +4,7 @@ This file provides context for AI coding agents working on the CortexBridge code
 
 ## Project Purpose
 
-CortexBridge is a cloud-synced `AGENTS.md` delivered via an MCP server. It gives coding agents consistent, authoritative instructions regardless of which agent, IDE, or model is being used. The instructions live in the cloud; the only local file is `.cortexconfig`, a project ID pointer.
+CortexBridge is a cloud-synced `AGENTS.md` delivered via an MCP server. It gives coding agents consistent, authoritative instructions regardless of which agent, harness, or model is being used. The instructions live in the cloud; the only local file is `.cortexconfig`, a project ID pointer.
 
 ## Repository Layout
 
