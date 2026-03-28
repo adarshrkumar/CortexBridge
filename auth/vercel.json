@@ -1,5 +1,4 @@
 {
-    "installCommand": "cd .. && npm install",
     "functions": {
         "api/index.ts": {
             "maxDuration": 30
