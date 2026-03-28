@@ -26,7 +26,7 @@ export default {
         'declaration-property-value-disallowed-list': {
             flex: ['row', 'column', 'row-reverse', 'column-reverse'],
         },
-        'order/properties-order': Object.values(propertyOrder).flat(),
+        'order/properties-order': Object.values(propertyOrder).flat().filter(p => !p.startsWith('//')),
     },
     overrides: [
         {

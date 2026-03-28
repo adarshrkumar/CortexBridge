@@ -19,6 +19,7 @@
         "inset-inline-end"
     ],
     "Box Model": [
+        "// display: block | inline | inline-block | contents only",
         "box-sizing",
         "margin",
         "margin-block",

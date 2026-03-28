@@ -1,7 +1,6 @@
 @use '../variables/tokens' as *;
 
 .auth {
-    margin: 0 auto;
     padding: 2rem;
     width: 100%;
     max-width: 28rem;
@@ -11,6 +10,11 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+
+    body:has(&) {
+        place-content: center;
+        place-items: center
+    }
 
     &__title {
         margin: 0;
