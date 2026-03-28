@@ -1,4 +1,4 @@
-import { auth } from '../../../../shared/auth/index.js';
+import { auth } from '../../../shared/auth/index.js';
 
 interface RequestContext {
     request: Request;

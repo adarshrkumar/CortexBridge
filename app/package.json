@@ -6,15 +6,19 @@
         "node": ">=22.12.0"
     },
     "scripts": {
-        "styles": "node ../styles/scripts/generate-colors.mjs && node ../styles/scripts/generate-tokens.mjs && node ../styles/scripts/generate-mixins.mjs",
-        "dev": "npm run styles && astro dev",
-        "build": "npm run styles && astro build",
+        "styles:scss": "node ../styles/scripts/generate-colors.mjs && node ../styles/scripts/generate-tokens.mjs && node ../styles/scripts/generate-mixins.mjs",
+        "dev": "npm run styles:scss && astro dev",
+        "build": "npm run styles:scss && astro build",
         "preview": "astro preview",
         "astro": "astro",
-        "check": "npm run styles && stylelint \"src/**/*.scss\""
+        "check": "npm run styles:scss && stylelint \"src/**/*.scss\" && astro check"
     },
     "dependencies": {
         "astro": "^6.1.1",
         "sass": "^1.98.0"
+    },
+    "devDependencies": {
+        "@astrojs/check": "^0.9.8",
+        "typescript": "^5.9.3"
     }
 }

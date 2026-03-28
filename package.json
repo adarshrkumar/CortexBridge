@@ -4,6 +4,7 @@
     "type": "module",
     "private": true,
     "scripts": {
+        "styles:scss": "node styles/scripts/generate-colors.mjs && node styles/scripts/generate-tokens.mjs && node styles/scripts/generate-mixins.mjs",
         "check": "npm run check --workspaces --if-present"
     },
     "workspaces": [
