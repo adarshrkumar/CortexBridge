@@ -14,17 +14,10 @@ const app = express();
 app.use(express.json());
 app.use(express.static(join(process.cwd(), 'public')));
 
-// Better Auth OAuth 2.1 authorization server — handles /authorize, /token,
-// /userinfo, /jwks, and all other auth endpoints.
-app.all('/api/auth/*splat', toNodeHandler(auth));
-
 // OAuth 2.1 authorization server discovery required by the MCP spec.
-// Proxied directly from Better Auth's built-in discovery endpoint.
-// RFC 8414: if issuer is BASE_URL/api/auth, discovery lives at /.well-known/oauth-authorization-server/api/auth
+// Proxied from the auth service.
 async function proxyWellKnown(_req: ExpressRequest, res: ExpressResponse) {
-    const response = await auth.handler(
-        new Request(`${BASE_URL}/api/auth/.well-known/oauth-authorization-server`)
-    );
+    const response = await fetch(`${AUTH_URL}/api/auth/.well-known/oauth-authorization-server`);
     const body = await response.text();
     res
         .status(response.status)
@@ -38,15 +31,15 @@ app.get('/.well-known/oauth-authorization-server/api/auth', proxyWellKnown);
 // OAuth 2.1 protected resource metadata required by the MCP spec.
 app.get('/.well-known/oauth-protected-resource', (_req, res: ExpressResponse) => {
     res.json({
-        resource: BASE_URL,
-        authorization_servers: [BASE_URL],
+        resource: MCP_URL,
+        authorization_servers: [AUTH_URL],
         scopes_supported: ['openid', 'profile', 'email', 'offline_access'],
         bearer_methods_supported: ['header'],
     });
 });
 
-// MCP auth client — verifies bearer tokens issued by Better Auth.
-const mcpAuth = createMcpAuthClient({ authURL: BASE_URL });
+// MCP auth client — verifies bearer tokens issued by the auth service.
+const mcpAuth = createMcpAuthClient({ authURL: AUTH_URL });
 
 // MCP endpoint — protected by OAuth bearer token verification.
 // Transport is stateless (sessionIdGenerator: undefined) for serverless compatibility.
@@ -114,9 +107,9 @@ function createMcpServer(): McpServer {
 
 if (!process.env.VERCEL) {
     app.listen(PORT, () => {
-        console.log(`CortexBridge listening on ${BASE_URL}`);
-        console.log(`  Auth:  ${BASE_URL}/api/auth`);
-        console.log(`  MCP:   ${BASE_URL}/mcp`);
+        console.log(`CortexBridge MCP listening on http://localhost:${PORT}`);
+        console.log(`  Auth: ${AUTH_URL}`);
+        console.log(`  MCP:  http://localhost:${PORT}/mcp`);
     });
 }
 

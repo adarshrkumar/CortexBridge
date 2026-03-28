@@ -1,9 +1,8 @@
 <script>
     import { createAuthClient } from 'better-auth/client';
 
-    const authClient = createAuthClient();
-
     const auth = document.querySelector<HTMLElement>('.auth');
+    const authClient = createAuthClient({ baseURL: auth?.dataset.authUrl });
 
     if (auth) {
         const content = auth.querySelector<HTMLElement>('.auth__content');
@@ -69,7 +68,7 @@
         btn.addEventListener('click', async () => {
             await authClient.signIn.social({
                 provider: btn.dataset.provider as 'google' | 'github',
-                callbackURL: '/',
+                callbackURL: window.location.origin,
             });
         });
     });

@@ -21,6 +21,12 @@ export const auth = betterAuth({
             verification: authSchema.verification,
         },
     }),
+    advanced: {
+        crossSubDomainCookies: {
+            enabled: !!process.env.COOKIE_DOMAIN,
+            domain: process.env.COOKIE_DOMAIN,
+        },
+    },
     emailAndPassword: {
         enabled: true,
     },
