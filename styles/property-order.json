@@ -192,9 +192,6 @@
         "table-layout",
         "caption-side",
         "empty-cells",
-        "break-before",
-        "break-after",
-        "break-inside",
         "justify-content",
         "justify-items",
         "justify-self",
@@ -265,6 +262,9 @@
         "hyphens",
         "overflow-wrap",
         "word-break",
+        "break-before",
+        "break-after",
+        "break-inside",
         "line-clamp"
     ],
     "Visual": [
