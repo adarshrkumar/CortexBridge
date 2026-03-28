@@ -27,7 +27,7 @@ app.get('/.well-known/oauth-authorization-server/api/auth', async (req, res) => 
     res.status(webRes.status).json(await webRes.json());
 });
 
-app.all('/*splat', (req, res) => {
+app.use((req, res) => {
     res.status(302).redirect(`https://${config.subdomains.app}.${domain}${`/${req.originalUrl}`.replaceAll('//', '/')}`);
 });
 
