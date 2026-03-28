@@ -2,7 +2,7 @@ import propertyOrder from './styles/property-order.json' with { type: 'json' };
 
 /** @type {import('stylelint').Config} */
 export default {
-    extends: ['stylelint-config-standard'],
+    extends: ['stylelint-config-standard-scss'],
     plugins: ['stylelint-order'],
     rules: {
         'property-no-vendor-prefix': [
@@ -28,4 +28,10 @@ export default {
         },
         'order/properties-order': Object.values(propertyOrder).flat(),
     },
+    overrides: [
+        {
+            files: ['mcp/public/**/*.css'],
+            extends: ['stylelint-config-standard'],
+        },
+    ],
 };

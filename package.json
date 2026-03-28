@@ -10,5 +10,13 @@
         "mcp",
         "docs",
         "app"
-    ]
+    ],
+    "devDependencies": {
+        "drizzle-kit": "^0.31.10",
+        "tsx": "^4.19.3",
+        "stylelint": "^17.6.0",
+        "stylelint-config-standard": "^40.0.0",
+        "stylelint-config-standard-scss": "^17.0.0",
+        "stylelint-order": "^8.1.1"
+    }
 }
