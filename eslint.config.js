@@ -4,7 +4,7 @@ import tsParser from '@typescript-eslint/parser';
 
 export default [
     {
-        ignores: ['**/node_modules', '**/dist']
+        ignores: ['**/node_modules', '**/dist', '**/.vercel']
     },
     {
         files: ['mcp/src/**/*.{js,ts}', 'mcp/api/**/*.{js,ts}'],
@@ -18,6 +18,7 @@ export default [
                 Buffer: 'readonly',
                 fetch: 'readonly',
                 structuredClone: 'readonly',
+                Request: 'readonly',
                 Response: 'readonly',
                 URL: 'readonly',
                 File: 'readonly',

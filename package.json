@@ -4,7 +4,7 @@
     "type": "module",
     "private": true,
     "scripts": {
-        "check": "npm run check -ws --if-present"
+        "check": "npm run check --workspaces --if-present"
     },
     "workspaces": [
         "mcp",
