@@ -1,0 +1,56 @@
+---
+import '../styles/components/auth.scss';
+
+interface Props {
+    mode: 'login' | 'register' | 'logout';
+}
+
+const { mode } = Astro.props;
+---
+
+<div class="auth">
+    {mode === 'logout' ? (
+        <>
+            <h1 class="auth__title">Sign out</h1>
+            <form class="auth__form" method="post">
+                <button class="auth__submit" type="submit">Sign out</button>
+            </form>
+            <p class="auth__footer"><a href="/">Cancel</a></p>
+        </>
+    ) : (
+        <>
+            <h1 class="auth__title">{mode === 'login' ? 'Sign in' : 'Create account'}</h1>
+
+            <form class="auth__form" method="post">
+                {mode === 'register' && (
+                    <div class="auth__field">
+                        <label class="auth__label" for="name">Name</label>
+                        <input class="auth__input" type="text" id="name" name="name" required />
+                    </div>
+                )}
+
+                <div class="auth__field">
+                    <label class="auth__label" for="email">Email</label>
+                    <input class="auth__input" type="email" id="email" name="email" required />
+                </div>
+
+                <div class="auth__field">
+                    <label class="auth__label" for="password">Password</label>
+                    <input class="auth__input" type="password" id="password" name="password" required />
+                </div>
+
+                <button class="auth__submit" type="submit">
+                    {mode === 'login' ? 'Sign in' : 'Create account'}
+                </button>
+            </form>
+
+            <p class="auth__footer">
+                {mode === 'login' ? (
+                    <>Don't have an account? <a href="/account/register">Register</a></>
+                ) : (
+                    <>Already have an account? <a href="/account/login">Sign in</a></>
+                )}
+            </p>
+        </>
+    )}
+</div>

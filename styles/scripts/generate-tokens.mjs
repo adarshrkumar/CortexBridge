@@ -14,7 +14,7 @@ export default function run() {
 
     const str = Object.entries(tokens).flatMap(([category, values]) =>
         Object.entries(values).map(([name, value]) => (
-            `$token-${category}-${name}: ${value};`
+            `$${category}-${name}: ${value};`
         ))
     ).join('\n');
 

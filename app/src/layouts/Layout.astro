@@ -2,14 +2,17 @@
 import '../styles/globals.scss';
 import config from '../../../config';
 
+interface Props {
+    title?: string;
+}
+
 let { title } = Astro.props;
-if (!title || title === undefined || title === null || title === '' || title.toLowerCase() === 'home') {
+if (!title || title.toLowerCase() === 'home') {
     title = config.name;
 }
 else {
     title = `${title} | ${config.name}`;
 }
-
 ---
 
 <html lang="en">
