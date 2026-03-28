@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import vercel from '@astrojs/vercel';
 import run from '../styles/scripts/generate-colors.mjs';
 import dotenv from 'dotenv';
 import { resolve, dirname } from 'path';
@@ -14,4 +15,5 @@ run();
 // https://astro.build/config
 export default defineConfig({
     output: 'server',
+    adapter: vercel(),
 });
