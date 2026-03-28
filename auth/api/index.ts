@@ -14,6 +14,11 @@ app.use(express.json());
 
 app.all('/api/auth/*splat', toNodeHandler(auth));
 
+app.all('*', (req, res) => {
+    res.status(302).redirect(`https://${config.subdomains.app}.${domain}${`/${req.originalUrl}`.replaceAll('//', '/')}`);
+});
+
+
 if (!process.env.VERCEL) {
     app.listen(PORT, () => {
         console.log(`Auth service listening on http://localhost:${PORT}`);

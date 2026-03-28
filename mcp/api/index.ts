@@ -3,6 +3,7 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 import express, { Request as ExpressRequest, Response as ExpressResponse } from 'express';
 import { join } from 'path';
+import { fileURLToPath } from 'url';
 import { z } from 'zod';
 
 import config from '../../config.js';
@@ -14,7 +15,7 @@ const AUTH_URL = `https://${config.subdomains.auth}.${domain}`;
 
 const app = express();
 app.use(express.json());
-app.use(express.static(join(process.cwd(), 'public')));
+app.use(express.static(join(fileURLToPath(new URL('.', import.meta.url)), '../public')));
 
 // OAuth 2.1 authorization server discovery required by the MCP spec.
 // Proxied from the auth service.
