@@ -38,6 +38,7 @@ Run `npm run check` from the **root** to check all workspaces at once.
 Shared styles are generated from JSON source files in `styles/`. Never edit generated output files directly — edit the JSON source and re-run the generator scripts, or run `npm run styles` in the relevant workspace.
 
 Generated outputs:
+
 - `mcp/public/colors.css` — CSS custom properties
 - `app/src/styles/variables/colors.scss` — SCSS color variables
 - `app/src/styles/variables/tokens.scss` — SCSS design token variables
