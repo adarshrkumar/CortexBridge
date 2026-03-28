@@ -5,13 +5,21 @@ import { oauthProvider } from '@better-auth/oauth-provider';
 import { db } from '../db/index.js';
 import * as authSchema from '../db/auth-schema.js';
 
+import config from '../../config.js';
+
 if (!process.env.BETTER_AUTH_SECRET) {
     throw new Error('BETTER_AUTH_SECRET is required');
 }
 
+const domain = new URL(config.url).hostname;
+
 export const auth = betterAuth({
     secret: process.env.BETTER_AUTH_SECRET,
-    baseURL: process.env.BETTER_AUTH_URL ?? 'http://localhost:3000',
+    baseURL: `https://${config.subdomains.auth}.${domain}`,
+    trustedOrigins: [
+        `https://${config.subdomains.app}.${domain}`,
+        `https://${config.subdomains.mcp}.${domain}`,
+    ],
     database: drizzleAdapter(db, {
         provider: 'pg',
         schema: {

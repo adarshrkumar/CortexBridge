@@ -1,8 +1,21 @@
 <script>
     import { createAuthClient } from 'better-auth/client';
+    import config from '../../../config.js';
+
+    const domain = new URL(config.url).hostname;
+    const authURL = `https://${config.subdomains.auth}.${domain}`;
+    const authClient = createAuthClient({ baseURL: authURL });
+
+    document.querySelectorAll<HTMLButtonElement>('[data-provider]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+            await authClient.signIn.social({
+                provider: btn.dataset.provider as 'google' | 'github',
+                callbackURL: window.location.origin,
+            });
+        });
+    });
 
     const auth = document.querySelector<HTMLElement>('.auth');
-    const authClient = createAuthClient({ baseURL: auth?.dataset.authUrl });
 
     if (auth) {
         const content = auth.querySelector<HTMLElement>('.auth__content');
@@ -63,13 +76,4 @@
             auth.style.setProperty('--y', `${by}px`);
         });
     }
-
-    document.querySelectorAll<HTMLButtonElement>('[data-provider]').forEach((btn) => {
-        btn.addEventListener('click', async () => {
-            await authClient.signIn.social({
-                provider: btn.dataset.provider as 'google' | 'github',
-                callbackURL: window.location.origin,
-            });
-        });
-    });
 </script>
