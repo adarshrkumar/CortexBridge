@@ -4,10 +4,11 @@ import { glob } from 'glob';
 import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { createMcpAuthClient } from 'better-auth/plugins/mcp/client';
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 
 import config from '../../config.js';
+
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
 
 const PORT = parseInt(process.env.PORT ?? '3000', 10);
 const domain = new URL(config.url).hostname;
