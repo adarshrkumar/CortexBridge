@@ -5,6 +5,7 @@ import express, { Request as ExpressRequest, Response as ExpressResponse } from 
 import { join } from 'path';
 import { fileURLToPath } from 'url';
 import { z } from 'zod';
+import { glob } from 'glob';
 
 import config from '../../config.js';
 
@@ -43,6 +44,18 @@ app.get('/.well-known/oauth-protected-resource', (_req, res) => {
 
 // MCP auth client — verifies bearer tokens issued by the auth service.
 const mcpAuth = createMcpAuthClient({ authURL: AUTH_URL });
+
+// Load all routes from api/routes/*.ts
+const routesDir = join(fileURLToPath(new URL('.', import.meta.url)), 'routes');
+const routeFiles = await glob('**/*.ts', { cwd: routesDir });
+for (const file of routeFiles) {
+    const routePath = join(routesDir, file);
+    const route = await import(`file://${routePath}`);
+    const handler = route.default;
+    if (typeof handler === 'function') {
+        handler({ app, mcpAuth });
+    }
+}
 
 // MCP endpoint — protected by OAuth bearer token verification.
 // Transport is stateless (sessionIdGenerator: undefined) for serverless compatibility.
