@@ -1,11 +1,11 @@
+import express, { Request as ExpressRequest, Response as ExpressResponse } from 'express';
+import { z } from 'zod';
+import { glob } from 'glob';
+import { join } from 'path';
+import { fileURLToPath } from 'url';
 import { createMcpAuthClient } from 'better-auth/plugins/mcp/client';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
-import express, { Request as ExpressRequest, Response as ExpressResponse } from 'express';
-import { join } from 'path';
-import { fileURLToPath } from 'url';
-import { z } from 'zod';
-import { glob } from 'glob';
 
 import config from '../../config.js';
 
