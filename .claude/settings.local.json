@@ -23,7 +23,8 @@
       "Bash(npm create:*)",
       "Bash(npm uninstall:*)",
       "Bash(ls:*)",
-      "Bash(wait)"
+      "Bash(wait)",
+      "PowerShell(npm run *)"
     ],
     "deny": [
       "Bash(cd:*)",
