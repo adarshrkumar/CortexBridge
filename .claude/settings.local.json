@@ -24,6 +24,10 @@
       "Bash(npm uninstall:*)",
       "Bash(ls:*)",
       "Bash(wait)"
+    ],
+    "deny": [
+      "Bash(cd:*)",
+      "PowerShell(Set-Location:*)"
     ]
   }
 }
