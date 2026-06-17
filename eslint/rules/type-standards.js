@@ -63,6 +63,12 @@ export default {
                         message: `z.${node.callee.property.name}() is not allowed. Use a precise Zod type or z.custom<T>() instead.`
                     });
                 }
+            },
+            TSObjectKeyword(node) {
+                context.report({
+                    node,
+                    message: 'The "object" type is too generic. Use a specific object type, a record type, or an interface instead.'
+                });
             }
         };
     }
