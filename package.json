@@ -14,7 +14,7 @@
         "app"
     ],
     "devDependencies": {
-        "@types/node": "^25.9.3",
+        "@types/node": "^25.9.5",
         "dotenv": "^17.3.1",
         "drizzle-kit": "^0.31.10",
         "stylelint": "^17.6.0",
