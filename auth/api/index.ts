@@ -1,3 +1,4 @@
+import { Request } from 'undici';
 import { toNodeHandler } from 'better-auth/node';
 import { oauthProviderAuthServerMetadata } from '@better-auth/oauth-provider';
 import express from 'express';
