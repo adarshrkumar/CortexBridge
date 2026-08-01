@@ -6,11 +6,6 @@ import express from 'express';
 import config from '../../config.js';
 import { auth } from '../../shared/auth/index.js';
 
-declare global {
-    var Request: typeof globalThis.Request;
-    var Headers: typeof globalThis.Headers;
-}
-
 const PORT = parseInt(process.env.PORT ?? '3001', 10);
 const domain = new URL(config.url).hostname;
 const authURL = `https://${config.subdomains.auth}.${domain}`;
