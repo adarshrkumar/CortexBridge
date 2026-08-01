@@ -1,9 +1,10 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel';
 import dotenv from 'dotenv';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+
+import { defineConfig } from 'astro/config';
+import vercel from '@astrojs/vercel';
 
 import run from '../styles/scripts/generate-colors.mjs';
 

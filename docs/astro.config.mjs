@@ -1,9 +1,10 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
 import dotenv from 'dotenv';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
 
 import run from '../styles/scripts/generate-colors.mjs';
 

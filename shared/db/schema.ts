@@ -1,6 +1,6 @@
 import { pgTable, text, timestamp, jsonb, unique } from 'drizzle-orm/pg-core';
-import type { ProjectContext } from '../lib/types.js';
 
+import type { ProjectContext } from '../lib/types.js';
 import { user } from './auth-schema.js';
 import { contextColumns } from './dull-schema.js';
 
