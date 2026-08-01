@@ -92,7 +92,7 @@ function createMcpServer(): McpServer {
             // TODO: resolve org from verified session; fetch from cloud storage
             const org = 'default-org';
             return {
-                content: [{ type: 'text' as const, text: `Instructions for ${org}/${name}@${git.branch}` }],
+                content: [{ type: 'text', text: `Instructions for ${org}/${name}@${git.branch}` }],
             };
         }
     );
@@ -110,11 +110,11 @@ function createMcpServer(): McpServer {
                 }).describe('Current git state'),
             },
         },
-        async ({ project, git }) => {
+        async ({ name, git }) => {
             // TODO: resolve org from verified session; fetch from cloud storage
             const org = 'default-org';
             return {
-                content: [{ type: 'text' as const, text: `Code styles for ${org}/${project}@${git.branch}` }],
+                content: [{ type: 'text', text: `Code styles for ${org}/${name}@${git.branch}` }],
             };
         }
     );
