@@ -19,11 +19,11 @@ server.registerTool(
     {
         description: 'Fetch instructions for the current org, project, and branch',
         inputSchema: {
-            project: z.string().describe('The project ID from .cortexconfig'),
+            name: z.string().describe('Git repository name'),
             git: gitState,
         },
     },
-    async ({ project, git }) => {
+    async ({ name, git }) => {
         // TODO: authenticate via Better Auth (org resolved from session)
         const org = 'default-org';
         // TODO: fetch instructions from cloud
@@ -32,7 +32,7 @@ server.registerTool(
             content: [
                 {
                     type: 'text',
-                    text: `Instructions for ${org}/${project}@${git.branch}`,
+                    text: `Instructions for ${org}/${name}@${git.branch}`,
                 },
             ],
         };
@@ -44,11 +44,11 @@ server.registerTool(
     {
         description: 'Fetch code style rules for the current org, project, and branch',
         inputSchema: {
-            project: z.string().describe('The project ID from .cortexconfig'),
+            name: z.string().describe('Git repository name'),
             git: gitState,
         },
     },
-    async ({ project, git }) => {
+    async ({ name, git }) => {
         // TODO: authenticate via Better Auth (org resolved from session)
         const org = 'default-org';
         // TODO: fetch code styles from cloud
@@ -57,7 +57,7 @@ server.registerTool(
             content: [
                 {
                     type: 'text',
-                    text: `Code styles for ${org}/${project}@${git.branch}`,
+                    text: `Code styles for ${org}/${name}@${git.branch}`,
                 },
             ],
         };

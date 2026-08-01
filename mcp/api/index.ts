@@ -80,7 +80,7 @@ function createMcpServer(): McpServer {
         {
             description: 'Fetch instructions for the current org, project, and branch',
             inputSchema: {
-                project: z.string().describe('The project ID from .cortexconfig'),
+                name: z.string().describe('Git repository name'),
                 git: z.object({
                     branch: z.string().describe('git rev-parse --abbrev-ref HEAD'),
                     commit: z.string().describe('git rev-parse HEAD'),
@@ -88,11 +88,11 @@ function createMcpServer(): McpServer {
                 }).describe('Current git state'),
             },
         },
-        async ({ project, git }) => {
+        async ({ name, git }) => {
             // TODO: resolve org from verified session; fetch from cloud storage
             const org = 'default-org';
             return {
-                content: [{ type: 'text' as const, text: `Instructions for ${org}/${project}@${git.branch}` }],
+                content: [{ type: 'text' as const, text: `Instructions for ${org}/${name}@${git.branch}` }],
             };
         }
     );
@@ -102,7 +102,7 @@ function createMcpServer(): McpServer {
         {
             description: 'Fetch code style rules for the current org, project, and branch',
             inputSchema: {
-                project: z.string().describe('The project ID from .cortexconfig'),
+                name: z.string().describe('Git repository name'),
                 git: z.object({
                     branch: z.string().describe('git rev-parse --abbrev-ref HEAD'),
                     commit: z.string().describe('git rev-parse HEAD'),
