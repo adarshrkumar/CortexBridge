@@ -11,6 +11,7 @@
       "mcp__vercel__get_deployment_build_logs",
       "mcp__vercel__get_runtime_logs",
       "mcp__vercel__web_fetch_vercel_url",
+      "Edit(*)",
       "Bash(npx vercel:*)",
       "Bash(vercel project:*)",
       "Bash(vercel env:*)",
