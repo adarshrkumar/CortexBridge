@@ -3,7 +3,6 @@ import { oauthProviderAuthServerMetadata } from '@better-auth/oauth-provider';
 import express from 'express';
 
 import config from '../../config.js';
-
 import { auth } from '../../shared/auth/index.js';
 
 const PORT = parseInt(process.env.PORT ?? '3001', 10);

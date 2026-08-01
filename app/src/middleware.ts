@@ -1,4 +1,5 @@
 import { defineMiddleware } from 'astro:middleware';
+
 import { isLoggedIn } from '../../shared/auth/index.js';
 
 const loginPageRoutes = ['/account/login', '/account/register'];
