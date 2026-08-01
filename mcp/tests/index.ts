@@ -15,6 +15,8 @@ const gitState = {
     })(),
 };
 
+const repoName = 'test-project';
+
 const client = new Client({ name: 'test-client', version: '0.0.1' });
 
 const transport = new StdioClientTransport({
@@ -32,7 +34,7 @@ console.log('tools:', tools.map(t => t.name));
 // call get-instructions
 const result = await client.callTool({
     name: 'get-instructions',
-    arguments: { project: 'test-project', git: gitState },
+    arguments: { name: repoName, git: gitState },
 }) as CallToolResult;
 console.assert(result.content.length > 0, 'expected content in response');
 const first = result.content[0];
@@ -41,7 +43,7 @@ console.log('get-instructions:', first.type === 'text' ? first.text : first.type
 // call get-code-styles
 const styles = await client.callTool({
     name: 'get-code-styles',
-    arguments: { project: 'test-project', git: gitState },
+    arguments: { name: repoName, git: gitState },
 }) as CallToolResult;
 console.assert(styles.content.length > 0, 'expected content in styles response');
 const firstStyle = styles.content[0];

@@ -16,6 +16,7 @@
       "Bash(vercel project:*)",
       "Bash(vercel env:*)",
       "Bash(npx drizzle-kit:*)",
+      "Bash(nvm use)",
       "Bash(npm install:*)",
       "Bash(npm run:*)",
       "Bash(npm show:*)",
