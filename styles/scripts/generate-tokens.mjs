@@ -21,6 +21,4 @@ export default function run() {
     paths.forEach(p => writeFileSync(join(__dirname, p), `${str}\n`));
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-    run();
-}
+if (process.argv[1] === fileURLToPath(import.meta.url)) run();
