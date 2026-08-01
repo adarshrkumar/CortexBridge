@@ -9,7 +9,7 @@
 
 - [x] Neon Postgres backend (serverless/HTTP) via Drizzle ORM — configured
 - [ ] Instructions schema v1 (schema defined but needs finalization)
-- [ ] Schema migrations (create/apply migrations for organization, project, auth tables)
+- [ ] Push schema to database (run `npx drizzle-kit push`)
 - [ ] Database seeding (populate initial data)
 - [ ] Connection pooling setup (Neon serverless)
 - [ ] Drizzle ORM queries for instructions CRUD

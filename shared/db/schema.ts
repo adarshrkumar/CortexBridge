@@ -21,6 +21,7 @@ export const organization = pgTable('organization', {
 export const project = pgTable('project', {
     id: text('id').primaryKey(),
     projectId: text('project_id').notNull().unique(),
+    gitRemote: text('git_remote').notNull().unique(),
     organizationId: text('organization_id')
         .notNull()
         .references(() => organization.id, { onDelete: 'cascade' }),
