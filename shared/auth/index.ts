@@ -65,6 +65,5 @@ export const auth = betterAuth({
 });
 
 export async function isLoggedIn(headers: Record<string, string>): Promise<boolean> {
-    const session = await auth.api.getSession({ headers });
     return (await auth.api.getSession({ headers })) !== null;
 }
