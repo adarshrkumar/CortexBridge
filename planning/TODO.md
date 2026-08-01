@@ -3,10 +3,16 @@
 ## Foundation
 
 - [ ] Better Auth OAuth 2.1 Provider (`@better-auth/oauth-provider`) — configured but unclear if deployed/working
-- [x] Neon Postgres backend (serverless/HTTP) via Drizzle ORM — configured
-- [ ] Database schema (organization, project, auth tables) — schema defined but no migrations exist/run
-- [ ] Instructions schema v1 (exists but minimal; v1 may not be finalized)
 - [ ] `.cortexconfig` specification and format
+
+## Database
+
+- [x] Neon Postgres backend (serverless/HTTP) via Drizzle ORM — configured
+- [ ] Instructions schema v1 (schema defined but needs finalization)
+- [ ] Schema migrations (create/apply migrations for organization, project, auth tables)
+- [ ] Database seeding (populate initial data)
+- [ ] Connection pooling setup (Neon serverless)
+- [ ] Drizzle ORM queries for instructions CRUD
 
 ## MCP
 
