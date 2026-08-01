@@ -1,11 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'fs-extra';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const rulesDir = path.join(__dirname, './rules');
-
-const ruleFiles = fs.readdirSync(rulesDir).filter(f => f.endsWith('.js'));
+const ruleFiles = fs.readdirSync('./eslint/rules').filter(f => f.endsWith('.js') && !f.startsWith('_'));
 
 export const rules = Object.fromEntries(
     await Promise.all(

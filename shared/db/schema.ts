@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, jsonb } from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, jsonb, unique } from 'drizzle-orm/pg-core';
 import { user } from './auth-schema.js';
 import { contextColumns } from './dull-schema.js';
 import type { ProjectContext } from '../lib/types.js';
@@ -20,11 +20,12 @@ export const organization = pgTable('organization', {
 
 export const project = pgTable('project', {
     id: text('id').primaryKey(),
-    projectId: text('project_id').notNull().unique(),
-    gitRemote: text('git_remote').notNull().unique(),
+    name: text('name').notNull(),
     organizationId: text('organization_id')
         .notNull()
         .references(() => organization.id, { onDelete: 'cascade' }),
     ...contextColumns,
     branches: jsonb('branches').$type<Record<string, ProjectContext>>().notNull().default({}),
-});
+}, table => ({
+    uniqueNamePerOrg: unique().on(table.organizationId, table.name),
+}));

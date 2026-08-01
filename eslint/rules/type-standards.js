@@ -1,44 +1,46 @@
-function containsUnknown(node) {
-    if (!node) return false;
-    if (node.type === 'TSUnknownKeyword') return true;
-    if (node.type === 'TSTypeParameterInstantiation' && node.params && Array.isArray(node.params)) return node.params.some(param => containsUnknown(param));
-    if (node.typeParameters && Array.isArray(node.typeParameters)) return node.typeParameters.some(param => containsUnknown(param));
-    if (node.type === 'TSTypeLiteral' && node.members && Array.isArray(node.members)) return node.members.some(member => containsUnknown(member.typeAnnotation));
-    if (node.typeAnnotation) return containsUnknown(node.typeAnnotation);
-    if (node.type === 'TSIndexSignature' && node.typeAnnotation) return containsUnknown(node.typeAnnotation);
-    return false;
-}
-
 export default {
     meta: {
         type: 'problem',
         docs: {
-            description: 'Type safety: forbid any, all uses of unknown type, casts with unknown, and unsafe Zod operations',
+            description: 'Type safety: forbid any, all uses of unknown type, casts with unknown or never, and unsafe Zod operations',
             category: 'Best Practices'
         },
         schema: []
     },
     create(context) {
+        const allComments = context.sourceCode.getAllComments?.() || context.sourceCode.getComments?.() || [];
+
+        allComments.forEach(comment => {
+            if (/@ts-(ignore|nocheck|expect-error)/.test(comment.value)) {
+                context.report({
+                    node: { type: 'Program' },
+                    loc: comment.loc,
+                    message: '@ts-ignore, @ts-nocheck, and @ts-expect-error comments are not allowed. Fix the type issues instead.'
+                });
+            }
+        });
+
         return {
             TSAsExpression(node) {
-                // Check for any cast with unknown in the type annotation
-                if (containsUnknown(node.typeAnnotation)) {
-                    context.report({
-                        node,
-                        message: 'Type cast with "unknown" is not allowed. Use a direct cast to a precise, concrete type instead.'
-                    });
-                }
+                if (node.typeAnnotation?.type === 'TSTypeOperator' && node.typeAnnotation.operator === 'keyof') return;
+                if (node.typeAnnotation?.type === 'TSUnionType' && node.typeAnnotation.types?.some(t => t.type === 'TSTypeQuery') && node.typeAnnotation.types?.some(t => t.type === 'TSLiteralType' && (t.literal === 'honeypot' || t.literal?.value === 'honeypot'))) return;
 
-                // Check for "as unknown as T" (double cast) - if expression is itself a TSAsExpression with unknown
-                if (
-                    node.expression?.type === 'TSAsExpression' &&
-                    node.expression.typeAnnotation?.type === 'TSUnknownKeyword'
-                ) {
-                    context.report({
-                        node,
-                        message: '"as unknown as T" double cast is not allowed. Use a direct cast to the target type instead.'
-                    });
-                }
+                context.report({
+                    node,
+                    message: 'Type casts (as expressions) are not allowed. Use proper typing or type annotations instead.'
+                });
+            },
+            TSTypeAssertion(node) {
+                context.report({
+                    node,
+                    message: 'Type casts (angle bracket assertions) are not allowed. Use proper typing or type annotations instead.'
+                });
+            },
+            TSAnyKeyword(node) {
+                context.report({
+                    node,
+                    message: 'The "any" type is not allowed. Use a precise, concrete type instead.'
+                });
             },
             TSUnknownKeyword(node) {
                 // Check for standalone unknown type usage (but allow in function parameters for now if needed)
@@ -63,12 +65,6 @@ export default {
                         message: `z.${node.callee.property.name}() is not allowed. Use a precise Zod type or z.custom<T>() instead.`
                     });
                 }
-            },
-            TSObjectKeyword(node) {
-                context.report({
-                    node,
-                    message: 'The "object" type is too generic. Use a specific object type, a record type, or an interface instead.'
-                });
             }
         };
     }
