@@ -4,9 +4,7 @@ import { fileURLToPath } from 'url';
 
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-
 import run from '../styles/scripts/generate-colors.mjs';
-
 if (process.env.NODE_ENV !== 'production') {
     dotenv.config({ path: resolve(dirname(fileURLToPath(import.meta.url)), '../.env') });
 }

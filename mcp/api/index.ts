@@ -6,10 +6,10 @@ import { fileURLToPath } from 'url';
 import express, { Request as ExpressRequest, Response as ExpressResponse } from 'express';
 import { createMcpAuthClient } from 'better-auth/plugins/mcp/client';
 
+import config from '../../config.js';
+
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
-
-import config from '../../config.js';
 
 const PORT = parseInt(process.env.PORT ?? '3000', 10);
 const domain = new URL(config.url).hostname;
