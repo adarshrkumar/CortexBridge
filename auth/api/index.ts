@@ -2,15 +2,15 @@ import { toNodeHandler } from 'better-auth/node';
 import { oauthProviderAuthServerMetadata } from '@better-auth/oauth-provider';
 import express from 'express';
 
-import { auth } from '../../shared/auth/index.js';
-
 import config from '../../config.js';
+
+import { auth } from '../../shared/auth/index.js';
 
 const PORT = parseInt(process.env.PORT ?? '3001', 10);
 const domain = new URL(config.url).hostname;
 const authURL = `https://${config.subdomains.auth}.${domain}`;
 
-const trustedOrigins = (auth.options.trustedOrigins ?? []) as string[];
+const trustedOrigins: string[] = auth.options.trustedOrigins ?? [];
 
 const app = express();
 app.use(express.json());
@@ -47,7 +47,6 @@ app.get('/.well-known/oauth-authorization-server/api/auth', async (req, res) => 
 app.use((req, res) => {
     res.status(302).redirect(`https://${config.subdomains.app}.${domain}${`/${req.originalUrl}`.replaceAll('//', '/')}`);
 });
-
 
 if (!process.env.VERCEL) {
     app.listen(PORT, () => {
