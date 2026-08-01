@@ -1,4 +1,5 @@
 import { pgTable, text, timestamp, jsonb } from 'drizzle-orm/pg-core';
+
 import type { CodeStyle } from '../lib/types.js';
 
 export const contextColumns = {
