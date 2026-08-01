@@ -9,9 +9,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
     const loggedIn = await isLoggedIn(context.request.headers);
 
     if (loginPageRoutes.includes(pathname)) {
-        if (loggedIn) {
-            return context.redirect('/');
-        }
+        if (loggedIn) return context.redirect('/');
         return next();
     }
 
