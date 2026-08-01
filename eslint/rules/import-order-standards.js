@@ -1,5 +1,5 @@
 import path from 'path';
-import fs from 'fs-extra';
+import fs from 'fs';
 
 function getImportGroup(source) {
     if (
