@@ -34,12 +34,20 @@ app.all('/api/auth/*splat', toNodeHandler(auth));
 const metadataHandler = oauthProviderAuthServerMetadata(auth);
 
 app.get('/.well-known/oauth-authorization-server', async (req, res) => {
-    const webRes = await metadataHandler(new Request(`${authURL}${req.originalUrl}`));
+    const webRes = await metadataHandler(Object.create(null, {
+        method: { value: 'GET' },
+        url: { value: `${authURL}${req.originalUrl}` },
+        headers: { value: new Map() },
+    }));
     res.status(webRes.status).json(await webRes.json());
 });
 
-app.get('/.well-known/oauth-authorization-server/api/auth', async (req, res) => {
-    const webRes = await metadataHandler(new Request(`${authURL}/.well-known/oauth-authorization-server`));
+app.get('/.well-known/oauth-authorization-server/api/auth', async (_req, res) => {
+    const webRes = await metadataHandler(Object.create(null, {
+        method: { value: 'GET' },
+        url: { value: `${authURL}/.well-known/oauth-authorization-server` },
+        headers: { value: new Map() },
+    }));
     res.status(webRes.status).json(await webRes.json());
 });
 
