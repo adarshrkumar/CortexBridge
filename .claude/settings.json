@@ -1,4 +1,61 @@
 {
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read|Edit|NotebookEdit|Agent|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/block-absolute-paths.sh",
+            "timeout": 20
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/block-bash-bypass-cmds.sh",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/block-git-ops.sh",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/block-all-cd.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/hooks/check-empty-agents-dir.js",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/on-stop.sh",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  },
   "permissions": {
     "allow": [
       "mcp__context7__resolve-library-id",
@@ -11,29 +68,27 @@
       "mcp__vercel__get_deployment_build_logs",
       "mcp__vercel__get_runtime_logs",
       "mcp__vercel__web_fetch_vercel_url",
-      "Edit(*)",
+      "mcp__ide__getDiagnostics",
       "Bash(npx vercel:*)",
       "Bash(vercel project:*)",
       "Bash(vercel env:*)",
       "Bash(npx drizzle-kit:*)",
       "Bash(nvm use)",
-      "Bash(npm install:*)",
       "Bash(npm run check)",
-      "Bash(npm show:*)",
-      "Bash(npm ls:*)",
-      "Bash(npm dedupe:*)",
-      "Bash(npm create:*)",
-      "Bash(npm uninstall:*)",
-      "Bash(ls:*)",
-      "Bash(wait)",
-      "PowerShell(npm run *)"
-    ],
-    "ask": [
-      "Edit(eslint*)"
+      "Bash(npm install:*)",
+      "Bash(npm uninstall:*)"
     ],
     "deny": [
-      "Bash(cd:*)",
-      "PowerShell(Set-Location:*)"
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(* git add *)",
+      "Bash(* git commit *)",
+      "Bash(npm run check 2>&1 | *)",
+      "Bash(* npm run check 2>&1 | *)"
+    ],
+    "ask": [
+      "Edit(eslint/**/*.js)",
+      "Edit(eslint*js)"
     ]
   }
 }
