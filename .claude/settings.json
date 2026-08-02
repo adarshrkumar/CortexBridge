@@ -18,7 +18,7 @@
       "Bash(npx drizzle-kit:*)",
       "Bash(nvm use)",
       "Bash(npm install:*)",
-      "Bash(npm run:*)",
+      "Bash(npm run check)",
       "Bash(npm show:*)",
       "Bash(npm ls:*)",
       "Bash(npm dedupe:*)",
