@@ -9,5 +9,5 @@ export const contextColumns = {
     updatedAt: timestamp('updated_at').notNull(),
 };
 
-// Ghost table used only for type inference — not a real migration target.
+// Ghost table used only for type inference — not a real database target.
 export const contextTable = pgTable('context', contextColumns);
