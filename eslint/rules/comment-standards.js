@@ -11,8 +11,9 @@ export default {
     create(context) {
         return {
             Program(node) {
-                // Check 1: Multi-line block comments
                 const comments = context.sourceCode.getAllComments?.() || context.sourceCode.getComments?.() || [];
+
+                // Check 1: Multi-line block comments
                 const jsDocTags = /@(param|returns?|example|deprecated|throws?|see|author|version|since|async|yields?|access|readonly|private|protected|static|abstract|type|enum|callback|template|typedef|implements|interface|extends|class|function|const|var|let|ignore|preserve|preserve-indent|pre|code|literal|external|link)/;
 
                 comments.forEach(comment => {
@@ -58,7 +59,27 @@ export default {
                     });
                 });
 
-                // Check 2: Duplicate consecutive comments
+                // // Check 2: Multiple consecutive short single-line comments
+                // for (let i = 0; i < comments.length - 1; i++) {
+                //     if (comments[i].type !== 'Line' || comments[i + 1].type !== 'Line') continue;
+                //     if (context.sourceCode.getText().substring(comments[i].range[1], comments[i + 1].range[0]).trim() !== '') continue;
+                //     if (comments[i].value.length >= 125 || comments[i + 1].value.length >= 125) continue;
+
+                //     let j = i + 1;
+                //     while (j < comments.length - 1 && comments[j].type === 'Line' && comments[j + 1].type === 'Line' && context.sourceCode.getText().substring(comments[j].range[1], comments[j + 1].range[0]).trim() === '' && comments[j + 1].value.length < 125) {
+                //         j++;
+                //     }
+
+                //     if (j > i) {
+                //         context.report({
+                //             node: node,
+                //             loc: comments[i + 1].loc,
+                //             message: 'Multiple consecutive single-line comments with less than 125 characters each should be combined into a single comment or separated by a blank line.'
+                //         });
+                //     }
+                // }
+
+                // Check 3: Duplicate consecutive comments
                 for (let i = 0; i < comments.length - 1; i++) {
                     if (context.sourceCode.getText().substring(comments[i].range[1], comments[i + 1].range[0]).trim() === '') {
                         if (comments[i].value === comments[i + 1].value) {
