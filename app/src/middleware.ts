@@ -6,7 +6,11 @@ const loginPageRoutes = ['/account/login', '/account/register'];
 
 export const onRequest = defineMiddleware(async (context, next) => {
     const { pathname } = context.url;
-    const loggedIn = await isLoggedIn(context.request.headers);
+    const headers: Record<string, string> = {};
+    for (const [key, value] of context.request.headers) {
+        headers[key] = value;
+    }
+    const loggedIn = await isLoggedIn(headers);
 
     if (loginPageRoutes.includes(pathname)) {
         if (loggedIn) return context.redirect('/');
