@@ -28,6 +28,9 @@
       "Bash(wait)",
       "PowerShell(npm run *)"
     ],
+    "ask": [
+      "Edit(eslint*)"
+    ],
     "deny": [
       "Bash(cd:*)",
       "PowerShell(Set-Location:*)"
