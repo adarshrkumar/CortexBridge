@@ -28,6 +28,6 @@ export const project = pgTable('project', {
         .references(() => organization.id, { onDelete: 'cascade' }),
     ...contextColumns,
     branches: jsonb('branches').$type<Record<string, ProjectContext>>().notNull().default({}),
-}, table => ({
-    uniqueNamePerOrg: unique().on(table.organizationId, table.name),
-}));
+}, table => [
+    unique().on(table.organizationId, table.name),
+]);
